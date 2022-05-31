@@ -11,6 +11,8 @@ import { AlumnosFormComponent } from './alumnos-form/alumnos-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AlumnosTableComponent } from './alumnos-table/alumnos-table.component';
 import { AlumnoContentComponent } from './alumno-content/alumno-content.component';
+import { JoinWordsPipe } from './custom/join-words.pipe';
+import { JoinPipe } from './custom/join.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { AlumnoContentComponent } from './alumno-content/alumno-content.componen
     SidenavComponent,
     AlumnosFormComponent,
     AlumnosTableComponent,
-    AlumnoContentComponent
+    AlumnoContentComponent,
+    JoinWordsPipe,
+    JoinPipe
   ],
   imports: [
     BrowserModule,

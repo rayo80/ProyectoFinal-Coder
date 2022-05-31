@@ -23,13 +23,13 @@ export class AlumnosFormComponent implements OnInit {
   ngOnInit(): void {
     this.formAlumnos = this.fbuild.group({
       name: ['', [Validators.required]],
-      apellido: ['', [Validators.required]],
+      apellidos: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       edad:['',[Validators.required, Validators.maxLength(2)]],
   });
   if(this.alumnoToEdit){
     this.formAlumnos.get('name')?.patchValue(this.alumnoToEdit.name);
-    this.formAlumnos.get('apellido')?.patchValue(this.alumnoToEdit.apellidos);
+    this.formAlumnos.get('apellidos')?.patchValue(this.alumnoToEdit.apellidos);
     this.formAlumnos.get('email')?.patchValue(this.alumnoToEdit.email);
     this.formAlumnos.get('edad')?.patchValue(this.alumnoToEdit.edad);
   }
