@@ -18,7 +18,7 @@ export class AlumnosTableComponent implements OnInit {
 
   @Input() alumnos: AlumnoSchema[]; //se recibe data
   @Output() alumnoToEdit= new EventEmitter<AlumnoSchema>();//esta data se envia con el boton editar
-  @Output() alumnodeleted= new EventEmitter<AlumnoSchema[] | null>();//esta data se envia con el boton editar(poner null)
+  @Output() alumnosupdated= new EventEmitter<AlumnoSchema[] | null>();//esta data se envia con el boton editar(poner null)
 
   displayedColumns: string[] = ['id', 'name', 'apellido', 'email', 'edad', 'editar', 'eliminar'];
   @ViewChild(MatTable) table: MatTable<AlumnoSchema>;
@@ -34,7 +34,6 @@ export class AlumnosTableComponent implements OnInit {
   }
 
   onDelete(elemento:AlumnoSchema){
-    console.log(elemento)
     /*ahora para realizar el delete es mas complejo pues tenemos
     esta parte solo seguire el afterclass*/
     //encontrar el elemento
@@ -42,6 +41,6 @@ export class AlumnosTableComponent implements OnInit {
     this.alumnos.splice(index,1);
     this.table.renderRows();
     //ahora que eliminamos actualizaremos la data de alumnos
-    this.alumnodeleted.emit(this.alumnos);
+    this.alumnosupdated.emit(this.alumnos);
   }
 }

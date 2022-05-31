@@ -15,20 +15,15 @@ export class AlumnoContentComponent implements OnInit {
   data:any=[];
   dataenviada = false;
   alumnoToEdit:AlumnoSchema|null; //esto es lo que enviamos al form cuando lo trataremos de editar
-
+  
+  contID=0;//cada vez que se de click a agregar data se le asignara un id
   onItemAdd(e:any){
     /*se rescribe la data*/
-    console.log(e)
-    let index=1;
-    if(this.data.length>0){
-      index=this.data.length+1;
-      e['id']=index;
-      this.data.push(e);
-    }else{
-      console.log(this.data)
-      e['id']=index;
-      this.data.push(e)
-    }
+    this.contID=this.contID+1
+
+    e['id']=this.contID;
+    this.data.push(e);
+
     console.log(this.data)
     //se envio la data entonces muestra la tabla
     this.dataenviada=true;
@@ -48,9 +43,15 @@ export class AlumnoContentComponent implements OnInit {
   onPassDelete(el:any){
     /*acaba de pasar una eliminacion entonces la longitud
     de la data afectara los ids que se iban agregando.
-    modificaremos el index*/
-    this.data=el;
-    console.log(el)
+    aca recibiremos toda la lista de alumnos que se modifico en table
+    */
+    console.log(this.data)
+    //nuestra data actual no tiene id
+ 
+    /*PODRIA IMPLEMENTAR LO DE LA CLASE PERO 
+    NO DESEO QUE SE REESCRIBAN LOS IDS YA QUE ESO ES PROPIO DE LA
+    DATA QUE VIENE DEL BACK*/
+    
   }
 
   onClickAdd(){
