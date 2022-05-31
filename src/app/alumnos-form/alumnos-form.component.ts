@@ -52,5 +52,6 @@ export class AlumnosFormComponent implements OnInit {
       this.itemEdited.emit(alumnoEdited);
     }
   }
+
   
 }
