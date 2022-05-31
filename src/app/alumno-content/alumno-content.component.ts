@@ -45,8 +45,16 @@ export class AlumnoContentComponent implements OnInit {
     this.alumnoToEdit=e;
   }
 
+  onPassDelete(el:any){
+    /*acaba de pasar una eliminacion entonces la longitud
+    de la data afectara los ids que se iban agregando.
+    modificaremos el index*/
+    this.data=el;
+    console.log(el)
+  }
+
   onClickAdd(){
-    /*Pasa al formulario y además elimina la data enviada a editar como editar 
+    /*Pasa al formulario y además elimina la data enviada a editar como 
     nulo porque sino el formulario tendria data que apareceria en el form*/
     this.dataenviada=false;
     this.alumnoToEdit=null;

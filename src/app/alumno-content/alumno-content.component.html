@@ -8,6 +8,7 @@
     <app-alumnos-table *ngIf="dataenviada" 
     [alumnos]="data"
     (alumnoToEdit)="onPassEdit($event)"
+    (alumnosupdated)="onPassDelete($event)"
     ></app-alumnos-table>
 
     <button mat-raised-button color="primary" 
