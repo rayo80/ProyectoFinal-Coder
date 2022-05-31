@@ -20,7 +20,7 @@ export class AlumnosTableComponent implements OnInit {
   @Input() alumnos: AlumnoSchema[]; //se recibe data
   @Output() alumnoToEdit= new EventEmitter<AlumnoSchema>();//esta data se envia con el boton editar
   
-  displayedColumns: string[] = ['id', 'name', 'apellido', 'edad', 'email','botones'];
+  displayedColumns: string[] = ['id', 'name', 'apellido', 'edad', 'email', 'botones'];
   @ViewChild(MatTable) table: MatTable<AlumnoSchema>;
 
   refresh(){

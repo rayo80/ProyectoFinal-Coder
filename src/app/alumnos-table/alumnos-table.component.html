@@ -1,14 +1,3 @@
-
-  <mat-card class="example-card my-5">
-    <mat-list role="list">
-      <div *ngFor="let alum of alumnos">
-        <mat-list role="list">
-          <mat-list-item role="listitem">{{alum |json}}</mat-list-item>
-        </mat-list>
-      </div>
-    </mat-list>
-  </mat-card>
-  
   <table mat-table [dataSource]="alumnos" class="mat-elevation-z8 demo-table" >
     
       <!-- Position Column -->
@@ -42,14 +31,12 @@
       </ng-container>
   
       <ng-container matColumnDef="botones">
-        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <th mat-header-cell *matHeaderCellDef> Opciones </th>
 
         <td mat-cell *matCellDef="let element" >
           <button mat-raised-button (click)="onUpdate(element)">
-              <span class="material-icons">
-                  update
-              </span>
-              Update
+              <mat-icon aria-hidden="false" aria-label="Example edit icon">edit</mat-icon>
+              Edit
             </button>
         </td>
       </ng-container>
@@ -57,9 +44,19 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    
+
     <div class="demo-button-container">
       <button mat-raised-button (click)="refresh()" color="primary">
-        refrescar tabla
+        refresh table
       </button>
     </div>
+
+    <mat-card class="example-card my-5">
+      <mat-list role="list">
+        <div *ngFor="let alum of alumnos">
+          <mat-list role="list">
+            <mat-list-item role="listitem">{{alum |json}}</mat-list-item>
+          </mat-list>
+        </div>
+      </mat-list>
+    </mat-card>

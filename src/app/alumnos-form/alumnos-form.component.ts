@@ -24,7 +24,7 @@ export class AlumnosFormComponent implements OnInit {
     this.formAlumnos = this.fbuild.group({
       name: ['', [Validators.required]],
       apellido: ['', [Validators.required]],
-      email: ['', Validators.email],
+      email: ['', [Validators.required, Validators.email]],
       edad:['',[Validators.required, Validators.maxLength(2)]],
   });
   if(this.alumnoToEdit){
@@ -36,20 +36,18 @@ export class AlumnosFormComponent implements OnInit {
   }
 
   onSubmit(){
-    /*
+    
     if((this.formAlumnos.status != 'INVALID')){     
-      this.itemAdded.emit(this.formAlumnos.value)
-      this.error =false 
+      if(!this.alumnoToEdit){
+        this.itemAdded.emit(this.formAlumnos.value);
+      }else{
+        this.formAlumnos.value['id']=this.alumnoToEdit.id
+        let alumnoEdited=this.formAlumnos.value;
+        this.itemEdited.emit(alumnoEdited);
+      }
     }else{
       this.error=true;
       console.log(this.formAlumnos)
-    }*/
-    if(!this.alumnoToEdit){
-      this.itemAdded.emit(this.formAlumnos.value);
-    }else{
-      this.formAlumnos.value['id']=this.alumnoToEdit.id
-      let alumnoEdited=this.formAlumnos.value;
-      this.itemEdited.emit(alumnoEdited);
     }
   }
 
