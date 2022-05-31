@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlumnoSchema } from '../alumnos-table/alumno.interface';
 
 @Component({
   selector: 'app-alumno-content',
@@ -8,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class AlumnoContentComponent implements OnInit {
 
   constructor() { }
-
   ngOnInit(): void {
   }
+
   data:any=[];
+  dataenviada = false;
+  alumnoToEdit:AlumnoSchema|null; //esto es lo que enviamos al form cuando lo trataremos de editar
 
   onItemAdd(e:any){
     /*se rescribe la data*/
@@ -27,6 +30,25 @@ export class AlumnoContentComponent implements OnInit {
       this.data.push(e)
     }
     console.log(this.data)
+    //se envio la data entonces muestra la tabla
+    this.dataenviada=true;
   }
 
+  onItemEdit(e:any){
+    let index=this.data.findIndex((x:AlumnoSchema)=>x.id===e.id);
+    this.data[index]=e;
+    this.dataenviada=true;
+  }
+
+  onPassEdit(e:any){
+    this.dataenviada=false;
+    this.alumnoToEdit=e;
+  }
+
+  onClickAdd(){
+    /*Pasa al formulario y además elimina la data enviada a editar como editar 
+    nulo porque sino el formulario tendria data que apareceria en el form*/
+    this.dataenviada=false;
+    this.alumnoToEdit=null;
+  }
 }

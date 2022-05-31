@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlumnoSchema } from '../alumnos-table/alumno.interface';
 
 @Component({
   selector: 'app-alumnos-form',
@@ -10,9 +11,11 @@ export class AlumnosFormComponent implements OnInit {
   formAlumnos:FormGroup;
   error=false
 
-//  @Input() alumnoToEdit:Alumnos|null; //alumno a ser editado
-  @Output() itemAdded = new EventEmitter<any>(); //item añadido por el form 
-//  @Output() itemEdited = new EventEmitter<any>(); // item editado por el form
+  @Input() alumnoToEdit:AlumnoSchema|null; //alumno a ser editado
+
+  /*dos outputs uno para agregar y otro para editar*/
+  @Output() itemAdded = new EventEmitter<any>(); 
+  @Output() itemEdited = new EventEmitter<any>(); 
   constructor(
     private fbuild: FormBuilder 
   ) { }
@@ -24,15 +27,30 @@ export class AlumnosFormComponent implements OnInit {
       email: ['', Validators.email],
       edad:['',[Validators.required, Validators.maxLength(2)]],
   });
+  if(this.alumnoToEdit){
+    this.formAlumnos.get('name')?.patchValue(this.alumnoToEdit.name);
+    this.formAlumnos.get('apellido')?.patchValue(this.alumnoToEdit.apellidos);
+    this.formAlumnos.get('email')?.patchValue(this.alumnoToEdit.email);
+    this.formAlumnos.get('edad')?.patchValue(this.alumnoToEdit.edad);
+  }
   }
 
   onSubmit(){
+    /*
     if((this.formAlumnos.status != 'INVALID')){     
       this.itemAdded.emit(this.formAlumnos.value)
       this.error =false 
     }else{
       this.error=true;
       console.log(this.formAlumnos)
+    }*/
+    if(!this.alumnoToEdit){
+      this.itemAdded.emit(this.formAlumnos.value);
+    }else{
+      this.formAlumnos.value['id']=this.alumnoToEdit.id
+      let alumnoEdited=this.formAlumnos.value;
+      this.itemEdited.emit(alumnoEdited);
     }
   }
+  
 }

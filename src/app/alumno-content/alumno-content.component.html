@@ -1,6 +1,18 @@
 <div class="ver">
-    <app-alumnos-form (itemAdded)="onItemAdd($event)"></app-alumnos-form>
+    <app-alumnos-form *ngIf="!dataenviada" 
+    (itemAdded)="onItemAdd($event)"
+    (itemEdited)="onItemEdit($event)"
+    [alumnoToEdit]="alumnoToEdit"
+    ></app-alumnos-form>
 
-    <app-alumnos-table  [alumnos]="data" ></app-alumnos-table>
+    <app-alumnos-table *ngIf="dataenviada" 
+    [alumnos]="data"
+    (alumnoToEdit)="onPassEdit($event)"
+    ></app-alumnos-table>
 
+    <button mat-raised-button color="primary" 
+    *ngIf="dataenviada" 
+    (click)="onClickAdd()">
+    Agregar un Alumno
+    </button>
 </div>

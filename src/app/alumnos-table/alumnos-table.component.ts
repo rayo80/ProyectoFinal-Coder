@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
-import { AlumnoSchema } from './user.interface'
+import { AlumnoSchema } from './alumno.interface'
 
 const ELEMENT_DATA: AlumnoSchema[] = [
 ];
