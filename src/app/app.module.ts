@@ -13,6 +13,7 @@ import { AlumnosTableComponent } from './alumnos-table/alumnos-table.component';
 import { AlumnoContentComponent } from './alumno-content/alumno-content.component';
 import { JoinWordsPipe } from './custom/join-words.pipe';
 import { JoinPipe } from './custom/join.pipe';
+import { AumentarDirective } from './custom/aumentar.directive';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { JoinPipe } from './custom/join.pipe';
     AlumnosTableComponent,
     AlumnoContentComponent,
     JoinWordsPipe,
-    JoinPipe
+    JoinPipe,
+    AumentarDirective
   ],
   imports: [
     BrowserModule,
