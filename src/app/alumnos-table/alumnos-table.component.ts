@@ -16,8 +16,9 @@ export class AlumnosTableComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   @Input() alumnos: AlumnoSchema[]; //se recibe data
-  displayedColumns: string[] = ['id', 'name', 'edad', 'email','apellido'];
+  displayedColumns: string[] = ['id', 'name', 'apellido', 'edad', 'email',];
   @ViewChild(MatTable) table: MatTable<AlumnoSchema>;
 
   refresh(){
