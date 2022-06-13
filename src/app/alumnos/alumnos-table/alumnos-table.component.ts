@@ -38,11 +38,9 @@ export class AlumnosTableComponent implements OnInit {
   }
 
   onDelete(elemento:AlumnoSchema){
-    /*ahora para realizar el delete es mas complejo pues tenemos
-    esta parte solo seguire el afterclass*/
     let indexOfAlumnos=this.alumnos.findIndex((al:any) => al.id===elemento.id);
 
-    this.alumnos.splice(indexOfAlumnos+1,1);
+    this.alumnos.splice(indexOfAlumnos,1);
     this.alumnosService.alumnoslist=this.alumnos!
     this.table.renderRows();
     //ahora que eliminamos actualizaremos la data de alumnos

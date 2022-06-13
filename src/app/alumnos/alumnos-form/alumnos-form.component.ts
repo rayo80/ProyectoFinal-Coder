@@ -46,6 +46,7 @@ export class AlumnosFormComponent implements OnInit {
     
     if((this.formAlumnos.status != 'INVALID')){  
         let localAlumnos=[];
+        let id;
         this.alumnosService.getActualIndex().subscribe(
           val=>this.index=val
         )
@@ -55,19 +56,22 @@ export class AlumnosFormComponent implements OnInit {
         
         if(localAlumnos.length>0 && !this.alumnoToEdit ){
           //traemos el id
-          this.index=localAlumnos.length+1;
-          this.formAlumnos.value['id'] = this.index;
+          id=this.index+1;
+          this.formAlumnos.value['id'] = id;
           localAlumnos.push(this.formAlumnos.value)
+
         }else if(localAlumnos.length===0 && !this.alumnoToEdit){
-          this.formAlumnos.value['id'] = this.index;
+          id=this.index+1;
+          this.formAlumnos.value['id'] = id;
           localAlumnos.push(this.formAlumnos.value)
         }
         if(this.alumnoToEdit){
           let indexOfAlumnos=localAlumnos.findIndex((al:any) => al.id===this.alumnoToEdit.id);
-          this.formAlumnos.value['id'] = indexOfAlumnos+1;
+          this.formAlumnos.value['id'] = indexOfAlumnos;
           localAlumnos[indexOfAlumnos] = this.formAlumnos.value;
         }
         this.alumnosService.alumnoslist=localAlumnos!
+        this.alumnosService.index=id;
         console.log(this.alumnosService.alumnoslist)  
         this.itemAdded.emit(true);
 

@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
 })
 export class AlumnosService {
   alumnoslist=<any>[];
-  index=1;
+  index=0;
   alumnoToEdit:any;
   alumnoToDelete:any;
   constructor(){ }
