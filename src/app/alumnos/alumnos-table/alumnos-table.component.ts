@@ -1,7 +1,8 @@
+import { AlumnosService } from './../../shared/alumnos.service';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { AlumnoSchema } from './alumno.interface'
-
 
 
 @Component({
@@ -10,37 +11,47 @@ import { AlumnoSchema } from './alumno.interface'
   styleUrls: ['./alumnos-table.component.scss']
 })
 export class AlumnosTableComponent implements OnInit {
+  toeliminate: any;
 
-  constructor() { }
+  constructor(private router: Router, private alumnosService: AlumnosService) { }
 
   ngOnInit(): void {
+    this.alumnosService.getAlumnosList().subscribe(
+      (val)=>this.alumnos=val
+    )
   }
 
-  @Input() alumnos: AlumnoSchema[]; //se recibe data
-  @Output() alumnoToEdit= new EventEmitter<AlumnoSchema>();//esta data se envia con el boton editar
-  @Output() alumnosupdated= new EventEmitter<AlumnoSchema[] | null>();//esta data se envia con el boton editar(poner null)
+  alumnos: AlumnoSchema[]; //se recibe data
+  alumnoToDelete:any;
+  @Output() OcultarTabla= new EventEmitter<any>();
+
 
   displayedColumns: string[] = ['id', 'name', 'apellido', 'complete', 'email', 'edad', 'editar', 'eliminar'];
   @ViewChild(MatTable) table: MatTable<AlumnoSchema>;
 
-  refresh(){
-    this.table.renderRows();
-  }
-
   onUpdate(elemento:AlumnoSchema){
-    console.log(elemento)
+
     //ahora este lo enviamos a nuestro formulario
-    this.alumnoToEdit.emit(elemento);
+    this.alumnosService.alumnoToEdit=elemento;
+    this.OcultarTabla.emit(true);
+    this.table.renderRows();
   }
 
   onDelete(elemento:AlumnoSchema){
     /*ahora para realizar el delete es mas complejo pues tenemos
     esta parte solo seguire el afterclass*/
-    //encontrar el elemento
-    let index=this.alumnos.findIndex(x=> x.id===elemento.id);
-    this.alumnos.splice(index,1);
+    let indexOfAlumnos=this.alumnos.findIndex((al:any) => al.id===elemento.id);
+
+    this.alumnos.splice(indexOfAlumnos+1,1);
+    this.alumnosService.alumnoslist=this.alumnos!
     this.table.renderRows();
     //ahora que eliminamos actualizaremos la data de alumnos
-    this.alumnosupdated.emit(this.alumnos);
   }
+
+  onAdd() {
+    //al hacer click ocultamos nuestra tabla y mostramos solo el formulario
+    this.OcultarTabla.emit(true);
+    this.table.renderRows();
+  }
+  
 }

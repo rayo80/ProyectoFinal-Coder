@@ -1,38 +1,51 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AngularMaterialModule } from './modules/material.module';
-import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
-import { AlumnosFormComponent } from './alumnos-form/alumnos-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AlumnosTableComponent } from './alumnos-table/alumnos-table.component';
-import { AlumnoContentComponent } from './alumno-content/alumno-content.component';
-import { JoinWordsPipe } from './custom/join-words.pipe';
-import { JoinPipe } from './custom/join.pipe';
-import { AumentarDirective } from './custom/aumentar.directive';
+
+import { HomeComponent } from './home/home.component';
+import { ToolbarComponent } from './layout/toolbar/toolbar.component';
+import { SidenavComponent } from './layout/sidenav/sidenav.component';
+
+//ROUTING
+import { AppRoutingModule } from './app-routing.module';
+import { AlumnosRoutingModule } from './alumnos/alumnos-routing.module';
+import { ProfesoresRoutingModule } from './profesores/profesores-routing.module';
+
+//modulo de alumnos
+import { AlumnoContentComponent } from './alumnos/alumno-content.component';
+import { AlumnosFormComponent } from './alumnos/alumnos-form/alumnos-form.component';
+import { AlumnosTableComponent } from './alumnos/alumnos-table/alumnos-table.component';
+
+//extra
+import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent,
+    HomeComponent,
     SidenavComponent,
+    ToolbarComponent,
+    AlumnoContentComponent,
     AlumnosFormComponent,
     AlumnosTableComponent,
-    AlumnoContentComponent,
-    JoinWordsPipe,
-    JoinPipe,
-    AumentarDirective
   ],
   imports: [
     BrowserModule,
-    AngularMaterialModule,
-    AppRoutingModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularMaterialModule,
+
+    AppRoutingModule,
+    AlumnosRoutingModule,
+    ProfesoresRoutingModule,
+
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
