@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlumnosService } from 'src/app/shared/alumnos.service';
-import { AlumnoSchema } from '../alumnos-table/alumno.interface';
+import { AlumnoSchema } from '../../models/alumno.interface';
 
 @Component({
   selector: 'app-alumnos-form',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlumnoSchema } from './alumnos-table/alumno.interface';
+import { AlumnoSchema } from '../models/alumno.interface';
 
 @Component({
   selector: 'app-alumno-content',

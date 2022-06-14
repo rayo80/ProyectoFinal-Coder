@@ -2,7 +2,7 @@ import { AlumnosService } from './../../shared/alumnos.service';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { AlumnoSchema } from './alumno.interface'
+import { AlumnoSchema } from '../../models/alumno.interface'
 
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { CursosService } from 'src/app/shared/cursos.service';
-import { CursoSchema } from '../curso.interface';
+import { CursoSchema } from '../../models/curso.interface';
 
 @Component({
   selector: 'app-cursos-table',
@@ -10,9 +10,12 @@ import { CursoSchema } from '../curso.interface';
 })
 export class CursosTableComponent implements OnInit {
   constructor(private cursosService: CursosService) { }
+  //variables para leer los servicios
   cursos: CursoSchema[];
   cursoToDelete:any;
+  //ocultar la pestaña
   @Output() OcultarTabla= new EventEmitter<any>();
+  //variables para tabla
   displayedColumns: string[] = ['id', 'name', 'codigo', 'horario','editar','eliminar'];
   @ViewChild(MatTable) table: MatTable<CursoSchema>;
   ngOnInit(): void {
