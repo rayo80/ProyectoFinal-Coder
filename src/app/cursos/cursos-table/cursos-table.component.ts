@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { MatTable } from '@angular/material/table';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { CursosService } from 'src/app/shared/cursos.service';
 import { CursoSchema } from '../../models/curso.interface';
 
@@ -8,21 +9,46 @@ import { CursoSchema } from '../../models/curso.interface';
   templateUrl: './cursos-table.component.html',
   styleUrls: ['./cursos-table.component.scss']
 })
-export class CursosTableComponent implements OnInit {
+export class CursosTableComponent implements OnInit, AfterViewInit {
   constructor(private cursosService: CursosService) { }
   //variables para leer los servicios
   cursos: CursoSchema[];
-  cursoToDelete:any;
   //ocultar la pestaña
   @Output() OcultarTabla= new EventEmitter<any>();
   //variables para tabla
-  displayedColumns: string[] = ['id', 'name', 'codigo', 'horario','editar','eliminar'];
+  displayedColumns: string[] = ['id', 'name', 'codigo', 'horario', 'profesor', 'editar','eliminar'];
   @ViewChild(MatTable) table: MatTable<CursoSchema>;
-  ngOnInit(): void {
+  dataSource = new MatTableDataSource<CursoSchema>();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  //FUNCIONES QUE NOS CONECTAN CON EL SERVICIO
+  getCursos(){
     this.cursosService.getCursosList().subscribe(
-      (val)=>this.cursos=val
+      (val)=>{
+        //uno es un simple array que renderiza la tabla
+        // y el segundo es un objeto al que le podemos aplicar
+        // paginaciones en el modulo Alumnos ya no hago esta separacion.
+        this.cursos=val;
+        this.dataSource.data=this.cursos;
+      }
     )
   }
+  deleteCurso(elemento:CursoSchema){
+    this.cursosService.deleteCurso(elemento).subscribe(
+      val=>{
+        console.log(val);
+      }
+    )
+  }
+
+  ngOnInit(): void {
+    this.getCursos();
+  }
+
   onUpdate(elemento:CursoSchema){
 
     //ahora este lo enviamos a nuestro formulario
@@ -32,16 +58,13 @@ export class CursosTableComponent implements OnInit {
   }
 
   onDelete(elemento:CursoSchema){
-    let indexlocal=this.cursos.findIndex((al:any) => al.id===elemento.id);
-
-    this.cursos.splice(indexlocal,1);
-    this.cursosService.cursoslist=this.cursos!
-    this.table.renderRows();
-    //ahora que eliminamos actualizaremos la data de alumnos
+    let indexlocal=this.dataSource.data.findIndex((al:any) => al.id===elemento.id);
+    this.dataSource.data.splice(indexlocal,1);
+    this.deleteCurso(elemento);
   }
+
   onAdd() {
     //al hacer click ocultamos nuestra tabla y mostramos solo el formulario
     this.OcultarTabla.emit(true);
-    this.table.renderRows();
   }
 }

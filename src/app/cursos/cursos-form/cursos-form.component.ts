@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CursoSchema } from 'src/app/models/curso.interface';
 import { CursosService } from 'src/app/shared/cursos.service';
 
 @Component({
@@ -16,11 +17,31 @@ export class CursosFormComponent implements OnInit {
   constructor(   private fbuild: FormBuilder, private cursosService: CursosService,
     ) { }
 
+  addCurso(curso:CursoSchema){
+    this.cursosService.createCurso(curso).subscribe(
+      val=>{
+        console.log(val);
+        this.VerForm.emit(true);
+      }
+    )
+  }
+
+  updateCurso(curso:CursoSchema){
+    this.cursosService.updateCurso(curso).subscribe(
+      val=>{
+        console.log(val);
+        this.VerForm.emit(true);
+      }
+    )
+  }
+
   ngOnInit(): void {
     this.formCursos = this.fbuild.group({
       name: ['', [Validators.required]],
       codigo: ['', [Validators.required]],
       horario: ['', [Validators.required, ]],
+      profesor: ['', [Validators.required, ]],
+
     });
     //el alumno a editar no cambia asi que lo podemos traer rapidamente
     this.cursosService.getCursoToEdit().subscribe(
@@ -31,34 +52,19 @@ export class CursosFormComponent implements OnInit {
       this.formCursos.get('name')?.patchValue(this.cursoToEdit.name);
       this.formCursos.get('codigo')?.patchValue(this.cursoToEdit.codigo);
       this.formCursos.get('horario')?.patchValue(this.cursoToEdit.horario);
+      this.formCursos.get('profesor')?.patchValue(this.cursoToEdit.profesor);
     }
   }
 
   onSubmit(){
       if((this.formCursos.status != 'INVALID')){  
-          let cursos=[];
-          let id;
-          //traemos la lista y el index actual
-          this.cursosService.getActualIndex().subscribe(
-            val=>this.index=val
-          )
-          this.cursosService.getCursosList().subscribe(
-            val=>cursos = val
-          )
           if(!this.cursoToEdit ){
-            //traemos el id
-            id=this.index+1;
-            this.formCursos.value['id'] = id;
-            cursos.push(this.formCursos.value)
-          }
-          if(this.cursoToEdit){
-            let indexOfAlumnos=cursos.findIndex((al:any) => al.id===this.cursoToEdit.id);
-            this.formCursos.value['id'] = indexOfAlumnos;
-            cursos[indexOfAlumnos] = this.formCursos.value;
-          }
-          this.cursosService.cursoslist=cursos!
-          this.cursosService.index=id;
-          this.VerForm.emit(true);
+            this.addCurso(this.formCursos.value);
+          }else{
+            this.formCursos.value['id'] = this.cursoToEdit.id;
+            this.updateCurso(this.formCursos.value);
+            this.cursosService.cursoToEdit = null;
+          }        
         }
       else{
             console.log('error')

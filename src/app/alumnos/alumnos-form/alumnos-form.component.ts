@@ -22,6 +22,27 @@ export class AlumnosFormComponent implements OnInit {
     private router: Router,
   ) { }
 
+  addAlumno(alumno:AlumnoSchema){
+    this.alumnosService.createApiStudent(alumno)
+    .subscribe(
+      data=>{
+        console.log(data);
+        // es necesario que el cambio se realice aca porque 
+        // esto es asincrono asi que podria ser que se cambie 
+        // y todavia no se ha terminado el proceso en este observable        
+        this.itemAdded.emit(true);
+      }
+    )
+  }
+  updateAlumno(alumno:AlumnoSchema){
+    this.alumnosService.updateApiStudent(alumno)
+    .subscribe(
+      data=>{
+        console.log(data);
+        this.itemAdded.emit(true);}
+    )
+  }
+
   ngOnInit(): void {
     this.formAlumnos = this.fbuild.group({
       name: ['', [Validators.required]],
@@ -45,36 +66,13 @@ export class AlumnosFormComponent implements OnInit {
   onSubmit(){
     
     if((this.formAlumnos.status != 'INVALID')){  
-        let localAlumnos=[];
-        let id;
-        this.alumnosService.getActualIndex().subscribe(
-          val=>this.index=val
-        )
-        this.alumnosService.getAlumnosList().subscribe(
-          val=>localAlumnos = val
-        )
-        
-        if(localAlumnos.length>0 && !this.alumnoToEdit ){
-          //traemos el id
-          id=this.index+1;
-          this.formAlumnos.value['id'] = id;
-          localAlumnos.push(this.formAlumnos.value)
-
-        }else if(localAlumnos.length===0 && !this.alumnoToEdit){
-          id=this.index+1;
-          this.formAlumnos.value['id'] = id;
-          localAlumnos.push(this.formAlumnos.value)
+        if(!this.alumnoToEdit){
+          this.addAlumno(this.formAlumnos.value);
+        }else{
+          this.formAlumnos.value['id'] = this.alumnoToEdit.id;
+          this.updateAlumno(this.formAlumnos.value);
+          this.alumnosService.alumnoToEdit = null;
         }
-        if(this.alumnoToEdit){
-          let indexOfAlumnos=localAlumnos.findIndex((al:any) => al.id===this.alumnoToEdit.id);
-          this.formAlumnos.value['id'] = indexOfAlumnos;
-          localAlumnos[indexOfAlumnos] = this.formAlumnos.value;
-        }
-        this.alumnosService.alumnoslist=localAlumnos!
-        this.alumnosService.index=id;
-        console.log(this.alumnosService.alumnoslist)  
-        this.itemAdded.emit(true);
-
     }else{
       this.error=true;
     }

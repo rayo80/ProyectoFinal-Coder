@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "1PFVILLA": {
+    "PFVILLA": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/1-pfvilla",
+            "outputPath": "dist/pfvilla",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -74,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "1PFVILLA:build:production"
+              "browserTarget": "PFVILLA:build:production"
             },
             "development": {
-              "browserTarget": "1PFVILLA:build:development"
+              "browserTarget": "PFVILLA:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,7 +85,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "1PFVILLA:build"
+            "browserTarget": "PFVILLA:build"
           }
         },
         "test": {
@@ -109,5 +109,5 @@
       }
     }
   },
-  "defaultProject": "1PFVILLA"
+  "defaultProject": "PFVILLA"
 }

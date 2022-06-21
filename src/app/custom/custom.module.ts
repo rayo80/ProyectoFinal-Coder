@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AumentarDirective } from './aumentar.directive';
+import { JoinPipe } from './join.pipe';
 
 
 @NgModule({
   declarations: [
+    JoinPipe,
     AumentarDirective
   ],
   imports: [
@@ -13,7 +15,8 @@ import { AumentarDirective } from './aumentar.directive';
   ],
   exports: [
     AumentarDirective,
-    CommonModule 
+    CommonModule,
+    JoinPipe
   ]
 })
 export class CustomModule { }

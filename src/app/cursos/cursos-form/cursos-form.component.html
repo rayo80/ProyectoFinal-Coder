@@ -26,6 +26,15 @@
           >Campo Requerido</mat-error>
         </mat-form-field>
       </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Profesor</mat-label>
+          <input formControlName="profesor" matInput>
+          <mat-error *ngIf="formCursos.get('profesor')?.errors?.['required']"
+          [style.font-size]="'x-smaller'"
+          >Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
 
     <button mat-raised-button color="primary">Submit</button>
     <div class="alert alert-danger" *ngIf="error">

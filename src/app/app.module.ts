@@ -10,19 +10,14 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { SidenavComponent } from './layout/sidenav/sidenav.component';
+import { HttpClientModule } from '@angular/common/http';
 
 //ROUTING
 import { AppRoutingModule } from './app-routing.module';
 import { AlumnosRoutingModule } from './alumnos/alumnos-routing.module';
 import { ProfesoresRoutingModule } from './profesores/profesores-routing.module';
-
-//modulo de alumnos
-import { AlumnoContentComponent } from './alumnos/alumno-content.component';
-import { AlumnosFormComponent } from './alumnos/alumnos-form/alumnos-form.component';
-import { AlumnosTableComponent } from './alumnos/alumnos-table/alumnos-table.component';
-
-//extra
-import { SharedModule } from './shared/shared.module';
+import { InscripcionesRoutingModule } from './inscripciones/inscripciones-routing.module';
+import { CursosRoutingModule } from './cursos/cursos-routing.module';
 
 
 @NgModule({
@@ -31,21 +26,19 @@ import { SharedModule } from './shared/shared.module';
     HomeComponent,
     SidenavComponent,
     ToolbarComponent,
-    AlumnoContentComponent,
-    AlumnosFormComponent,
-    AlumnosTableComponent,
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     AngularMaterialModule,
 
     AppRoutingModule,
     AlumnosRoutingModule,
+    CursosRoutingModule,
     ProfesoresRoutingModule,
-
-    SharedModule
+    InscripcionesRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

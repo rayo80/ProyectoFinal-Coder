@@ -1,4 +1,4 @@
-import { JoinPipe } from './join.pipe';
+import { JoinPipe } from '../custom/join.pipe';
 
 describe('JoinPipe', () => {
   it('create an instance', () => {
