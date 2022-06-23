@@ -18,6 +18,7 @@ import { AlumnosRoutingModule } from './alumnos/alumnos-routing.module';
 import { ProfesoresRoutingModule } from './profesores/profesores-routing.module';
 import { InscripcionesRoutingModule } from './inscripciones/inscripciones-routing.module';
 import { CursosRoutingModule } from './cursos/cursos-routing.module';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { CursosRoutingModule } from './cursos/cursos-routing.module';
     HomeComponent,
     SidenavComponent,
     ToolbarComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
