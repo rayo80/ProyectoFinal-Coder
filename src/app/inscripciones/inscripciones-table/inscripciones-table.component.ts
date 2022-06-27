@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AlumnosService } from 'src/app/shared/alumnos.service';
-import { CursosService } from 'src/app/shared/cursos.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { InscripcionGETSchema } from 'src/app/models/inscripciones.interface';
+import { InscripcionesService } from 'src/app/shared/inscripciones.service';
 
 @Component({
   selector: 'app-inscripciones-table',
@@ -9,33 +11,30 @@ import { CursosService } from 'src/app/shared/cursos.service';
 })
 export class InscripcionesTableComponent implements OnInit {
 
-  constructor(private alumnosService: AlumnosService, private cursosService: CursosService,
-              private inscripcionesService: CursosService) { }
+  constructor(private inscripcionesService: InscripcionesService) { }
   //variables para leer los servicios
-  alumnos: any[];
-  cursos: any[];
-  inscripciones: any[];
-  ngOnInit(): void {
-    this.alumnosService.getAlumnosList().subscribe(
-      (val) => this.alumnos = val
-    )
-    this.cursosService.getCursosList().subscribe(
-      (val) => this.cursos = val
-    )
-    this.inscripcionesService.getCursosList().subscribe(
-      (val) => this.cursos = val
+  @Output() openform: EventEmitter<boolean> = new EventEmitter();
+  //objeto material-angular para cargar lista con paginacion
+  paginator: MatPaginator[];
+  inscripciones = new MatTableDataSource<InscripcionGETSchema>();
+
+  getInscripcionesList(){
+    this.inscripcionesService.getInscripcionesList().subscribe(
+      (val) => {this.inscripciones.data = val;}
     )
   }
-  displayedColumns=['id','alumno','curso','fecha','editar','eliminar'];
+  ngOnInit(): void {
+    this.getInscripcionesList();
+  }
+  displayedColumns=['id','codigo','alumno','curso','fecha','editar','eliminar'];
 
 
   onUpdate(elemento:any){
-    console.log("update");
+    this.inscripcionesService.inscripcionToEdit=elemento;
+    this.openform.emit(true);
   }
   onDelete(elemento:any){
     console.log("delete");
   }
-  onAdd(){
-    console.log("add");
-  }
+
 }

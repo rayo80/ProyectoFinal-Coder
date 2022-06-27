@@ -51,7 +51,7 @@ export class AlumnosFormComponent implements OnInit {
       edad:['',[Validators.required, Validators.maxLength(2)]],
     });
     
-    this.alumnosService.getAlumnoToEdit().subscribe(
+    this.alumnosService.getStudentToEdit().subscribe(
       val=>this.alumnoToEdit=val
     )
     

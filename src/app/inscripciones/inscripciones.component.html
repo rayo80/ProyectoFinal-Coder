@@ -1,2 +1,6 @@
-<app-inscripciones-form></app-inscripciones-form>
-<app-inscripciones-table></app-inscripciones-table>
+<app-inscripciones-table (openform)="abre($event)"></app-inscripciones-table>
+<button mat-raised-button color="primary" (click)='openModal()'>Añadir</button>
+
+<ng-template #ModalComponent>
+    <app-inscripciones-form mat-dialog-content></app-inscripciones-form>
+</ng-template>

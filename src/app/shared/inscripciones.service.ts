@@ -1,23 +1,28 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { InscripcionGETSchema, InscripcionSchema } from '../models/inscripciones.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InscripcionesService {
-
-  constructor() { }
-  inscripcioneslist=<any>[];
-  index=0;
+  url_root = 'https://62ae1b79b735b6d16a3eee06.mockapi.io/aula/inscripciones/'
+  constructor(private http: HttpClient) { }
   inscripcionToEdit:any;
-  inscripcionToDelete:any;
-  getInscripcionesList():Observable<any> {
-    return of(this.inscripcioneslist);
+  getInscripcionesList():Observable<InscripcionGETSchema[]> {
+    return this.http.get<InscripcionGETSchema[]>(this.url_root);
   }
   getInscripcionToEdit():Observable<any> {
     return of(this.inscripcionToEdit);
   }
-  getActualIndex():Observable<any> {
-    return of(this.index);
+  createInscripcion(inscripcion: InscripcionSchema):Observable<InscripcionSchema> {
+    return this.http.post<InscripcionSchema>(this.url_root, inscripcion)
+  }
+  updateInscripcion(inscripcion: InscripcionSchema):Observable<InscripcionSchema> {
+    return this.http.put<InscripcionSchema>(this.url_root+inscripcion.id, inscripcion)
+  }
+  deleteInscripcion(inscripcion: InscripcionSchema):Observable<InscripcionSchema> {
+    return this.http.delete<InscripcionSchema>(this.url_root+inscripcion.id)
   }
 }

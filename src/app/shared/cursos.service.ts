@@ -7,9 +7,8 @@ import { CursoSchema } from '../models/curso.interface';
   providedIn: 'root'
 })
 export class CursosService {
-  url_root = 'https://62ae1b79b735b6d16a3eee06.mockapi.io/aula/cursos/'
+  url_root = 'https://62ae1b79b735b6d16a3eee06.mockapi.io/aula/curso/'
   cursoslist=<any>[];
-  index=0;
   cursoToEdit:any;
   constructor(private http: HttpClient) { }
   getCursosList():Observable<CursoSchema[]>{

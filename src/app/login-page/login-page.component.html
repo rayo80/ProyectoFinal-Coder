@@ -4,15 +4,15 @@
         <P>Accede para continuar</P>
       </div>
       <form (ngSubmit)="onLogin()" name="loginForm" [formGroup]="loginForm">
-        <div class="emailInput">
+        <div class="usernameInput">
           <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Email</mat-label>
+            <mat-label>Username</mat-label>
             <input
-              formControlName="email"
+              formControlName="username"
               matInput
-              placeholder="Enter email address" required
+              placeholder="Enter your username" required
             />
-            <mat-error *ngIf="!loginForm.controls['email'].valid">
+            <mat-error *ngIf="!loginForm.controls['username'].valid">
                 Email is required
               </mat-error>
           </mat-form-field>

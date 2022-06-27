@@ -8,22 +8,14 @@ import { AlumnoSchema } from '../models/alumno.interface';
 })
 export class AlumnosService {
   constructor(private http: HttpClient){ }
-  root_url = 'https://62ae1b79b735b6d16a3eee06.mockapi.io/aula/alumnos/'
+  root_url = 'https://62ae1b79b735b6d16a3eee06.mockapi.io/aula/alumno/'
   alumnoslist=<any>[];
   index=0;
   alumnoToEdit:any;
   alumnoToDelete:any;
-  getAlumnosList():Observable<any> {
-    return of(this.alumnoslist);
-  }
-  getAlumnoToEdit():Observable<any> {
+
+  getStudentToEdit():Observable<any> {
     return of(this.alumnoToEdit);
-  }
-  getAlumnoToDelete():Observable<any> {
-    return of(this.alumnoToDelete);
-  }
-  getActualIndex():Observable<any> {
-    return of(this.index);
   }
 
   getApiStudentsList():Observable<AlumnoSchema[]> {

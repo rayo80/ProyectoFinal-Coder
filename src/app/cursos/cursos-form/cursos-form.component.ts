@@ -14,7 +14,7 @@ export class CursosFormComponent implements OnInit {
   error = false
   index: any;
   @Output() VerForm= new EventEmitter<any>();
-  constructor(   private fbuild: FormBuilder, private cursosService: CursosService,
+  constructor( private fbuild: FormBuilder, private cursosService: CursosService,
     ) { }
 
   addCurso(curso:CursoSchema){
