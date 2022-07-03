@@ -1,4 +1,5 @@
-<form [formGroup]="formInscripciones" (ngSubmit)="onSubmit()">
+<form mat-dialog-content [formGroup]="formInscripciones">
+
     <div>
         <mat-form-field appearance="fill">
             <mat-label>Codigo de Inscripcion</mat-label>
@@ -37,8 +38,9 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
-    <button mat-raised-button color="primary">Submit</button>
+
     <div class="alert alert-danger" *ngIf="error">
         Los campos no han sido rellanados correctamente
     </div>
 </form>
+<button mat-dialog-actions mat-raised-button (click)="onSubmit()" color="primary">Guardar</button>

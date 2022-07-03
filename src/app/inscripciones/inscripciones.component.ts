@@ -25,5 +25,8 @@ export class InscripcionesComponent implements OnInit {
       this.openModal();
     }
   }
+  guardar(){
+    console.log("guardar");
+  }
 
 }

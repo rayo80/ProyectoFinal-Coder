@@ -6,6 +6,7 @@ import { AlumnoSchema } from 'src/app/models/alumno.interface';
 import { AlumnosService } from 'src/app/shared/alumnos.service';
 import { CursosService } from 'src/app/shared/cursos.service';
 import { CursoSchema } from 'src/app/models/curso.interface';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-inscripciones-form',
@@ -13,9 +14,10 @@ import { CursoSchema } from 'src/app/models/curso.interface';
   styleUrls: ['./inscripciones-form.component.scss']
 })
 export class InscripcionesFormComponent implements OnInit {
-
   constructor(private fbuild:FormBuilder,private inscripcionesService:InscripcionesService,
-              private alumnosService:AlumnosService, private cursosService: CursosService) { }
+              private alumnosService:AlumnosService, private cursosService: CursosService,
+              public dialog: MatDialog) { }
+            
   formInscripciones:FormGroup;
   inscripcionToEdit:InscripcionSchema; //inscripcion a ser editado
   error=false;
@@ -73,7 +75,6 @@ export class InscripcionesFormComponent implements OnInit {
         if(!this.inscripcionToEdit){
           this.addInscripcion(this.formInscripciones.value);
         }else{
-          console.log('entre a editar')
           this.formInscripciones.value['id'] = this.inscripcionToEdit.id;
           this.updateInscripcion(this.formInscripciones.value);
           this.inscripcionesService.inscripcionToEdit=null;

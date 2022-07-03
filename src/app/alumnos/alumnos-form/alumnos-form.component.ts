@@ -68,6 +68,7 @@ export class AlumnosFormComponent implements OnInit {
     if((this.formAlumnos.status != 'INVALID')){  
         if(!this.alumnoToEdit){
           this.addAlumno(this.formAlumnos.value);
+          this.router.navigate(['/alumnos']);
         }else{
           this.formAlumnos.value['id'] = this.alumnoToEdit.id;
           this.updateAlumno(this.formAlumnos.value);
