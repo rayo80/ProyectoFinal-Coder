@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { CursosService } from 'src/app/shared/cursos.service';
+import { CursosService } from 'src/app/shared/services/cursos.service';
 import { CursoSchema } from '../../models/curso.interface';
 
 @Component({
@@ -40,7 +40,7 @@ export class CursosTableComponent implements OnInit, AfterViewInit {
   deleteCurso(elemento:CursoSchema){
     this.cursosService.deleteCurso(elemento).subscribe(
       val=>{
-        console.log(val);
+        this.getCursos();
       }
     )
   }
@@ -58,8 +58,6 @@ export class CursosTableComponent implements OnInit, AfterViewInit {
   }
 
   onDelete(elemento:CursoSchema){
-    let indexlocal=this.dataSource.data.findIndex((al:any) => al.id===elemento.id);
-    this.dataSource.data.splice(indexlocal,1);
     this.deleteCurso(elemento);
   }
 

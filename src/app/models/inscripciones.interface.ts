@@ -3,13 +3,17 @@ interface AlumnoInscripcionSchema{
     name: string;
 }
 
+interface CursoInscripcionSchema{
+    id: number;
+    name: string;
+}
 
 export interface InscripcionGETSchema{
     id: number;
     codigo: string;
     alumno: AlumnoInscripcionSchema;
     fecha: Date;
-    curso: number;
+    curso: CursoInscripcionSchema;
 }
 
 export interface InscripcionSchema{

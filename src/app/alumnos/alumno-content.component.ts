@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AlumnoSchema } from '../models/alumno.interface';
+import { AlumnosService } from '../shared/services/alumnos.service';
+import { AlumnosFormComponent } from './alumnos-form/alumnos-form.component';
+import { AlumnosTableComponent } from './alumnos-table/alumnos-table.component';
 
 @Component({
   selector: 'app-alumno-content',
@@ -7,24 +11,37 @@ import { AlumnoSchema } from '../models/alumno.interface';
   styleUrls: ['./alumno-content.component.scss']
 })
 export class AlumnoContentComponent implements OnInit {
+  constructor(public dialog: MatDialog, private alumnoService: AlumnosService) { }
+  @ViewChild(AlumnosTableComponent) alumnoTable: AlumnosTableComponent;
 
-  constructor() { }
   ngOnInit(): void {
   }
 
-
-  
-  data:any=[];
-  dataenviada = false;
   alumnoToEdit:AlumnoSchema|null; //esto es lo que enviamos al form cuando lo trataremos de editar
   
 
   //el formulario envia un valor, hora de ocultarlo
-  onItemAdd(e:any){
-    this.dataenviada=!e;
-  }
-  onToCreate(e:any){
-    this.dataenviada=e;
+  openModal(): void {
+    let dialogRef = this.dialog.open(AlumnosFormComponent, 
+      { disableClose: false });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.alumnoTable.refreshTable();
+    });
   }
 
+  openModalCreate(): void {
+    this.alumnoService.alumnoToEdit=null;
+    this.openModal()
+  }
+
+  openModalEdit(data: any): void {
+    this.openModal()
+  }
+  /*
+  getStudent(data: any): void {
+    this.alumnoService.getSingleStudent(data).subscribe(
+      (val) => {
+        this.alumnoToEdit = val;}
+    )}*/
 }

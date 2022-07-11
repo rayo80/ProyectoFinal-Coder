@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CursoSchema } from 'src/app/models/curso.interface';
-import { CursosService } from 'src/app/shared/cursos.service';
+import { CursosService } from 'src/app/shared/services/cursos.service';
 
 @Component({
   selector: 'app-cursos-form',
@@ -12,7 +12,6 @@ export class CursosFormComponent implements OnInit {
   formCursos:FormGroup;
   cursoToEdit:any; //cursoto Edit
   error = false
-  index: any;
   @Output() VerForm= new EventEmitter<any>();
   constructor( private fbuild: FormBuilder, private cursosService: CursosService,
     ) { }
@@ -20,7 +19,6 @@ export class CursosFormComponent implements OnInit {
   addCurso(curso:CursoSchema){
     this.cursosService.createCurso(curso).subscribe(
       val=>{
-        console.log(val);
         this.VerForm.emit(true);
       }
     )
@@ -29,7 +27,6 @@ export class CursosFormComponent implements OnInit {
   updateCurso(curso:CursoSchema){
     this.cursosService.updateCurso(curso).subscribe(
       val=>{
-        console.log(val);
         this.VerForm.emit(true);
       }
     )

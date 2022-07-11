@@ -21,5 +21,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     AngularMaterialModule,
     ReactiveFormsModule,
   ]
+
 })
 export class InscripcionesModule { }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ActivateGuard } from './guards/activate.guard';
+import { ActivateGuard } from './core/guards/activate.guard';
 import { HomeComponent } from "./home/home.component";
 import { LoginPageComponent } from './login-page/login-page.component';
 
@@ -33,7 +33,12 @@ const routes: Routes = [
       path: "inscripciones",
       canActivate: [ActivateGuard,],
       loadChildren: () => import('./inscripciones/inscripciones.module').then((m) => m.InscripcionesModule),
-    }
+    },
+    {
+      path: "usuarios",
+      canActivate: [ActivateGuard,],
+      loadChildren: () => import('./usuarios/usuarios.module').then((m) => m.UsuariosModule),
+    },
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { AlumnosService } from './../../shared/alumnos.service';
+import { AlumnosService } from '../../shared/services/alumnos.service';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -14,48 +14,48 @@ import { MatPaginator } from '@angular/material/paginator';
 export class AlumnosTableComponent implements OnInit {
 
   constructor(private router: Router, private alumnosService: AlumnosService) { }
+  //Modal abrir
+  @Output() openForm: EventEmitter<boolean> = new EventEmitter();
+
+  //Tabla y paginación
   alumnos = new MatTableDataSource<AlumnoSchema>(); //se recibe data pero ya no en una lista sino en un objeto
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatTable) table: MatTable<AlumnoSchema>;
+  displayedColumns: string[] = ['id', 'name', 'apellido', 'complete', 'email', 'edad', 'editar', 'eliminar'];
+
   getAlumnos(){
     this.alumnosService.getApiStudentsList().subscribe(
       (val)=>this.alumnos.data=val
     )
   }
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  deleteAlumno(elemento:AlumnoSchema){
+    this.alumnosService.deleteStudent(elemento).subscribe({ 
+      complete: ()=> this.getAlumnos()
+    })
+  }
+
   ngOnInit(): void {
     this.getAlumnos();
-    this.alumnos.paginator = this.paginator;
   }
+
   ngAfterViewInit() {
-    console.log(this.paginator)
     this.alumnos.paginator = this.paginator;
   }
-  
-  @Output() OcultarTabla= new EventEmitter<any>();
-
-
-  displayedColumns: string[] = ['id', 'name', 'apellido', 'complete', 'email', 'edad', 'editar', 'eliminar'];
-  @ViewChild(MatTable) table: MatTable<AlumnoSchema>;
 
   onUpdate(elemento:AlumnoSchema){
 
     //ahora este lo enviamos a nuestro formulario
     this.alumnosService.alumnoToEdit=elemento;
-    this.OcultarTabla.emit(true);
+    this.openForm.emit(true);
   }
 
   onDelete(elemento:AlumnoSchema){
-    let indexOfAlumnos=this.alumnos.data.findIndex((al:any) => al.id===elemento.id);
-
-    this.alumnos.data.splice(indexOfAlumnos,1);
-    this.alumnosService.alumnoslist=this.alumnos!
-    this.table.renderRows();
-    //ahora que eliminamos actualizaremos la data de alumnos
+    this.deleteAlumno(elemento);
   }
 
-  onAdd() {
-    //al hacer click ocultamos nuestra tabla y mostramos solo el formulario
-    this.OcultarTabla.emit(true);
-    this.table.renderRows();
+  refreshTable() {
+    this.getAlumnos();
   }
   
 }

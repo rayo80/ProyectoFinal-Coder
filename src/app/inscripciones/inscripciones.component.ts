@@ -1,5 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { InscripcionesService } from '../shared/services/inscripciones.service';
+import { InscripcionesFormComponent } from './inscripciones-form/inscripciones-form.component';
+import { InscripcionesTableComponent } from './inscripciones-table/inscripciones-table.component';
 
 @Component({
   selector: 'app-inscripciones',
@@ -7,26 +10,27 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./inscripciones.component.scss']
 })
 export class InscripcionesComponent implements OnInit {
-  @ViewChild('ModalComponent') modal: TemplateRef<any>;
-  constructor(public dialog: MatDialog) { }
-
+  constructor(public dialog: MatDialog,
+              private inscripcionesService: InscripcionesService) { }
+  @ViewChild(InscripcionesTableComponent) inscripcionesTable: InscripcionesTableComponent;
   ngOnInit(): void {
   }
 
   openModal(): void {
-    let dialogRef = this.dialog.open(this.modal, { disableClose: false });
+    let dialogRef = this.dialog.open(InscripcionesFormComponent, 
+      { disableClose: false });
+
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
+      this.inscripcionesTable.refreshTable();
     });
   }
 
-  abre(value:boolean){
-    if (value){
-      this.openModal();
-    }
-  }
-  guardar(){
-    console.log("guardar");
+  openModalCreate(): void {
+    this.inscripcionesService.inscripcionToEdit=null;
+    this.openModal()
   }
 
+  openModalEdit(data: any): void {
+    this.openModal()
+  }
 }

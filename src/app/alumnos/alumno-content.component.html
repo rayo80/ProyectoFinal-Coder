@@ -1,9 +1,8 @@
-<div class="ver">
-    <app-alumnos-form *ngIf="dataenviada" 
-    (itemAdded)="onItemAdd($event)"
-    ></app-alumnos-form>
 
-    <app-alumnos-table *ngIf="!dataenviada" 
-    (OcultarTabla)="onToCreate($event)"
-    ></app-alumnos-table>
-</div>
+<app-alumnos-table
+(openForm)="openModalEdit($event)"
+></app-alumnos-table>
+<button mat-raised-button 
+color="primary" (click)='openModalCreate()'>
+    Añadir
+</button>

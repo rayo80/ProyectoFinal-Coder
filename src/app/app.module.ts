@@ -8,8 +8,7 @@ import { AngularMaterialModule } from './modules/material.module';
 import { AppComponent } from './app.component';
 
 import { HomeComponent } from './home/home.component';
-import { ToolbarComponent } from './layout/toolbar/toolbar.component';
-import { SidenavComponent } from './layout/sidenav/sidenav.component';
+import { LayoutModule } from './layout/layout.module';
 import { HttpClientModule } from '@angular/common/http';
 
 //ROUTING
@@ -19,14 +18,13 @@ import { ProfesoresRoutingModule } from './profesores/profesores-routing.module'
 import { InscripcionesRoutingModule } from './inscripciones/inscripciones-routing.module';
 import { CursosRoutingModule } from './cursos/cursos-routing.module';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { UsuariosRoutingModule } from './usuarios/usuarios-routing.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SidenavComponent,
-    ToolbarComponent,
     LoginPageComponent,
   ],
   imports: [
@@ -40,7 +38,9 @@ import { LoginPageComponent } from './login-page/login-page.component';
     AlumnosRoutingModule,
     CursosRoutingModule,
     ProfesoresRoutingModule,
-    InscripcionesRoutingModule
+    InscripcionesRoutingModule,
+    LayoutModule,
+    UsuariosRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

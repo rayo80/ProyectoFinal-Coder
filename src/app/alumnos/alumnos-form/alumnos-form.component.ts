@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AlumnosService } from 'src/app/shared/alumnos.service';
+import { AlumnosService } from 'src/app/shared/services/alumnos.service';
 import { AlumnoSchema } from '../../models/alumno.interface';
 
 @Component({
@@ -11,37 +12,38 @@ import { AlumnoSchema } from '../../models/alumno.interface';
 })
 export class AlumnosFormComponent implements OnInit {
   formAlumnos:FormGroup;
-  alumnoToEdit:any; //alumno a ser editado
+  alumnoToEdit:AlumnoSchema; //alumno a ser editado
   error=false
-  index: any;
-  @Output() itemAdded = new EventEmitter<any>(); 
-
 
   constructor(
     private fbuild: FormBuilder, private alumnosService: AlumnosService,
-    private router: Router,
+    public dialogRef:MatDialogRef<AlumnosFormComponent>
   ) { }
 
   addAlumno(alumno:AlumnoSchema){
     this.alumnosService.createApiStudent(alumno)
     .subscribe(
       data=>{
-        console.log(data);
         // es necesario que el cambio se realice aca porque 
         // esto es asincrono asi que podria ser que se cambie 
         // y todavia no se ha terminado el proceso en este observable        
-        this.itemAdded.emit(true);
+        this.dialogRef.close();;
       }
     )
   }
+
   updateAlumno(alumno:AlumnoSchema){
     this.alumnosService.updateApiStudent(alumno)
     .subscribe(
       data=>{
-        console.log(data);
-        this.itemAdded.emit(true);}
+        this.dialogRef.close();}
     )
   }
+
+  getStudentEdit(){
+    this.alumnosService.getStudentToEdit().subscribe(
+      val=>this.alumnoToEdit = val
+  )}
 
   ngOnInit(): void {
     this.formAlumnos = this.fbuild.group({
@@ -51,9 +53,7 @@ export class AlumnosFormComponent implements OnInit {
       edad:['',[Validators.required, Validators.maxLength(2)]],
     });
     
-    this.alumnosService.getStudentToEdit().subscribe(
-      val=>this.alumnoToEdit=val
-    )
+    this.getStudentEdit();
     
     if(this.alumnoToEdit){
       this.formAlumnos.get('name')?.patchValue(this.alumnoToEdit.name);
@@ -68,7 +68,6 @@ export class AlumnosFormComponent implements OnInit {
     if((this.formAlumnos.status != 'INVALID')){  
         if(!this.alumnoToEdit){
           this.addAlumno(this.formAlumnos.value);
-          this.router.navigate(['/alumnos']);
         }else{
           this.formAlumnos.value['id'] = this.alumnoToEdit.id;
           this.updateAlumno(this.formAlumnos.value);
@@ -79,5 +78,4 @@ export class AlumnosFormComponent implements OnInit {
     }
   }
 
-  
 }

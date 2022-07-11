@@ -1,8 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { InscripcionGETSchema } from 'src/app/models/inscripciones.interface';
-import { InscripcionesService } from 'src/app/shared/inscripciones.service';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { InscripcionGETSchema, InscripcionSchema } from 'src/app/models/inscripciones.interface';
+import { InscripcionesService } from 'src/app/shared/services/inscripciones.service';
 
 @Component({
   selector: 'app-inscripciones-table',
@@ -12,29 +12,50 @@ import { InscripcionesService } from 'src/app/shared/inscripciones.service';
 export class InscripcionesTableComponent implements OnInit {
 
   constructor(private inscripcionesService: InscripcionesService) { }
-  //variables para leer los servicios
-  @Output() openform: EventEmitter<boolean> = new EventEmitter();
-  //objeto material-angular para cargar lista con paginacion
-  paginator: MatPaginator[];
-  inscripciones = new MatTableDataSource<InscripcionGETSchema>();
+  //salida que indica que se abre el modal
+  @Output() openForm: EventEmitter<boolean> = new EventEmitter();
 
-  getInscripcionesList(){
-    this.inscripcionesService.getInscripcionesList().subscribe(
-      (val) => {this.inscripciones.data = val;}
-    )
-  }
+  //objeto material-angular para cargar lista con paginacion
+  inscripciones = new MatTableDataSource<InscripcionGETSchema>();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatTable) table: MatTable<InscripcionGETSchema>;
+  displayedColumns=['id','codigo','alumno','curso','fecha','editar','eliminar'];
+
   ngOnInit(): void {
     this.getInscripcionesList();
   }
-  displayedColumns=['id','codigo','alumno','curso','fecha','editar','eliminar'];
 
-
-  onUpdate(elemento:any){
-    this.inscripcionesService.inscripcionToEdit=elemento;
-    this.openform.emit(true);
-  }
-  onDelete(elemento:any){
-    console.log("delete");
+  ngAfterViewInit() {
+    this.inscripciones.paginator = this.paginator;
   }
 
+  deleteInscripcion(elemento:InscripcionSchema){
+    this.inscripcionesService.deleteInscripcion(elemento).subscribe(
+      val=>{
+        this.getInscripcionesList();
+      }
+    )
+  }
+
+  getInscripcionesList(){
+    this.inscripcionesService.getInscripcionesList().subscribe(
+      (val) => {this.inscripciones.data = val}
+    )
+  }
+
+  onUpdate(elemento:InscripcionGETSchema){
+    //el elemnto tiene campos realcionados en json
+    //con id y nombre para poder conocer la data
+    //ahora para editar lo enviamos al form para representarlo
+    this.inscripcionesService.inscripcionToEdit = elemento;
+    this.openForm.emit(true);
+  }
+  
+  onDelete(elemento:InscripcionSchema){
+    this.deleteInscripcion(elemento);
+  }
+
+  refreshTable(){
+    this.getInscripcionesList();
+  }
 }

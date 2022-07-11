@@ -7,7 +7,7 @@ import { AlumnosTableComponent } from './alumnos-table/alumnos-table.component';
 import { AlumnoContentComponent } from './alumno-content.component';
 import { AngularMaterialModule } from '../modules/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CustomModule } from '../custom/custom.module';
+import { CustomModule } from '../shared/custom/custom.module';
 
 @NgModule({
   declarations: [
