@@ -1,21 +1,12 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '../shared/services/shared.module';
 import { AlumnoContentComponent } from './alumno-content.component';
-import { AlumnosFormComponent } from './alumnos-form/alumnos-form.component';
 
 const routes: Routes = [
   {
     path: "",
     component: AlumnoContentComponent,
-    /*children:[
-      {
-        path: "formulario",
-        component: AlumnosFormComponent,
-      }
-    ]*/
-
   },
 ];
 

@@ -10,8 +10,10 @@ import { InscripcionesTableComponent } from './inscripciones-table/inscripciones
   styleUrls: ['./inscripciones.component.scss']
 })
 export class InscripcionesComponent implements OnInit {
+
   constructor(public dialog: MatDialog,
               private inscripcionesService: InscripcionesService) { }
+
   @ViewChild(InscripcionesTableComponent) inscripcionesTable: InscripcionesTableComponent;
   ngOnInit(): void {
   }
