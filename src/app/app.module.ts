@@ -17,13 +17,14 @@ import { ProfesoresRoutingModule } from './profesores/profesores-routing.module'
 import { InscripcionesRoutingModule } from './inscripciones/inscripciones-routing.module';
 import { CursosRoutingModule } from './cursos/cursos-routing.module';
 import { UsuariosRoutingModule } from './usuarios/usuarios-routing.module';
-import { AuthRoutingModule } from './auth/auth-routing.module';
+import { LoginRoutingModule } from './login/login-routing.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -39,7 +40,7 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
     ProfesoresRoutingModule,
     InscripcionesRoutingModule,
     UsuariosRoutingModule,
-    AuthRoutingModule,
+    LoginRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
