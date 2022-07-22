@@ -20,7 +20,6 @@ export class InscripcionesService {
     return this.http.post<InscripcionSchema>(this.url_root, inscripcion)
   }
   updateInscripcion(inscripcion: InscripcionSchema):Observable<InscripcionSchema> {
-    console.log(inscripcion);
     return this.http.put<InscripcionSchema>(this.url_root+inscripcion.id, inscripcion)
   }
   deleteInscripcion(inscripcion: InscripcionSchema):Observable<InscripcionSchema> {

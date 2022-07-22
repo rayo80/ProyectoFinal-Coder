@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  public user: any;
   constructor() { }
 
   ngOnInit(): void {
+    this.user = sessionStorage.getItem('usuario');
   }
 
 }

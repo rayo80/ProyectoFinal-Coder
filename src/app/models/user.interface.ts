@@ -13,5 +13,5 @@ export interface LoginSchema{
 
 export interface SessionSchema{
     token: string;
-    password: string;
+    username: string;
 }
