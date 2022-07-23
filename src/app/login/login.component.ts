@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup = this.fb.group({
     username: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
+    password: ['', [Validators.required, Validators.minLength(3)]]
   })
 
   onLogin() {
@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
 
 
     if(this.loginForm.valid) {
+      alert(name);
       this.authService.login(this.loginForm.value).subscribe(
         data => this.correctLogin(data),
         )
@@ -43,6 +44,6 @@ export class LoginComponent implements OnInit {
     
     sessionStorage.setItem('usuario', data.username);
     sessionStorage.setItem('token', data.token)
-    this.router.navigate(['']);
+    this.router.navigate(['/']);
   }
 }

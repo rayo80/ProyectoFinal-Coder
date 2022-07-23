@@ -1,0 +1,35 @@
+-  request:
+      url: ^/login$
+      method: POST
+      headers:
+         content-type: application/json
+      json: '{"username":"admin","password":"admin"}'
+   response:
+      status: 200
+      headers:
+         content-type: application/json
+      body: '{"username":"admin","token":"123456"}'
+
+-  request:
+      url: ^/login$
+      method: POST
+      headers:
+         content-type: application/json
+      json: '{"username":"profesor","password":"profesor"}'
+   response:
+      status: 200
+      headers:
+         content-type: application/json
+      body: '{"username":"profesor","token":"1234567"}'
+
+-  request:
+      url: ^/login$
+      method: POST
+      headers:
+         content-type: application/json
+      json: '{"username":"alumno","password":"alumno"}'
+   response:
+      status: 200
+      headers:
+         content-type: application/json
+      body: '{"username":"alumno","token":"12345678"}'

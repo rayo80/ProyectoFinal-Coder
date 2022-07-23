@@ -1,0 +1,27 @@
+
+[
+ {
+   "request": {
+     "url": "^/login$",
+     "method": "POST",
+     "headers": {
+      "Content-Type": "application/json"
+      },
+     "file": "./login.json"
+   },
+   "response": {
+     "status": 200,
+     "file": "./session.json"
+    }
+ },
+ {
+   "request": {
+    "url": "^/login$",
+    "method": "POST",
+    "post": null
+    },
+   "response": {
+      "status": 401
+   }
+  }
+]

@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  url_root = 'https://62ae1b79b735b6d16a3eee06.mockapi.io/aula/users/'
+  url_root = 'http://localhost:8882/'
   constructor(private http: HttpClient) { }
 
   extractData: any;
