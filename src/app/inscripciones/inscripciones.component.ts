@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef} from '@angular/material/dialog';
-import { InscripcionesService } from '../shared/services/inscripciones.service';
+import { InscripcionesService } from './inscripciones.service';
 import { InscripcionesFormComponent } from './inscripciones-form/inscripciones-form.component';
 import { InscripcionesTableComponent } from './inscripciones-table/inscripciones-table.component';
 

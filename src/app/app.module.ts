@@ -7,17 +7,17 @@ import { AppComponent } from './app.component';
 
 import { AngularMaterialModule } from './modules/material.module';
 import { HomeComponent } from './home/home.component';
-import { LayoutModule } from './layout/layout.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './core/core.module';
 
 //ROUTING
 import { AppRoutingModule } from './app-routing.module';
 import { AlumnosRoutingModule } from './alumnos/alumnos-routing.module';
 import { ProfesoresRoutingModule } from './profesores/profesores-routing.module';
-import { InscripcionesRoutingModule } from './inscripciones/inscripciones-routing.module';
 import { CursosRoutingModule } from './cursos/cursos-routing.module';
 import { UsuariosRoutingModule } from './usuarios/usuarios-routing.module';
 import { LoginRoutingModule } from './login/login-routing.module';
+
 
 
 @NgModule({
@@ -32,13 +32,12 @@ import { LoginRoutingModule } from './login/login-routing.module';
     ReactiveFormsModule,
     HttpClientModule,
     AngularMaterialModule,
-    LayoutModule,
+    CoreModule,
   
     AppRoutingModule,
     AlumnosRoutingModule,
     CursosRoutingModule,
     ProfesoresRoutingModule,
-    InscripcionesRoutingModule,
     UsuariosRoutingModule,
     LoginRoutingModule,
   ],

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { CursosService } from 'src/app/shared/services/cursos.service';
+import { CursosService } from 'src/app/cursos/cursos.service';
 import { CursoSchema } from '../../models/curso.interface';
 
 @Component({

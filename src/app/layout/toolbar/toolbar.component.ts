@@ -8,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class ToolbarComponent implements OnInit {
 
   constructor() { }
-
+  nombreUsuario: string =""
   ngOnInit(): void {
+    this.nombreUsuario = sessionStorage.getItem('usuario') || "";
   }
+  
 
 }

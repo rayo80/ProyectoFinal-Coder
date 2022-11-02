@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AlumnosService } from 'src/app/shared/services/alumnos.service';
+import { AlumnosService } from 'src/app/alumnos/alumnos.service';
 import { AlumnoSchema } from '../../models/alumno.interface';
 
 @Component({

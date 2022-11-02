@@ -6,6 +6,12 @@ export interface UserSchema{
     is_admin: boolean;
 }
 
+export interface UserLoginSchema{
+    username: string;
+    password?: string;
+    is_admin: boolean;
+}
+
 export interface LoginSchema{
     username: string;
     password: string;
@@ -14,4 +20,5 @@ export interface LoginSchema{
 export interface SessionSchema{
     token: string;
     username: string;
+    role: string;
 }

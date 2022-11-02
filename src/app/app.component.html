@@ -1,9 +1,11 @@
-<app-toolbar></app-toolbar>
+<crm-navigation-bar (toggleSidenav)="navigationSidenav.toggle()">
+</crm-navigation-bar>
 <mat-sidenav-container>
   <!-- Sidenav -->
-  <mat-sidenav class="mat-elevation-z8" mode="side" opened>
-    <app-sidenav></app-sidenav>
+  <mat-sidenav  #navigationSidenav class="mat-elevation-z8" mode="over">
+    <crm-sidenav></crm-sidenav>
   </mat-sidenav>
+
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

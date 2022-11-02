@@ -1,23 +1,24 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { InscripcionesRoutingModule } from './inscripciones-routing.module';
-import { InscripcionesComponent } from './inscripciones.component';
+import { RouterModule} from '@angular/router';
 import { InscripcionesTableComponent } from './inscripciones-table/inscripciones-table.component';
 import { InscripcionesFormComponent } from './inscripciones-form/inscripciones-form.component';
 import { AngularMaterialModule } from '../modules/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { inscripcionesRoutes } from './inscripciones.routing';
+import { InscripcionesComponent } from './inscripciones.component';
 
 
 @NgModule({
   declarations: [
-    InscripcionesComponent,
     InscripcionesTableComponent,
     InscripcionesFormComponent,
+    InscripcionesComponent
   ],
   imports: [
+    RouterModule.forChild(inscripcionesRoutes),
     CommonModule,
-    InscripcionesRoutingModule,
     AngularMaterialModule,
     ReactiveFormsModule,
   ]

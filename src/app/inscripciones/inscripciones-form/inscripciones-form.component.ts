@@ -1,10 +1,10 @@
 import { InscripcionSchema } from 'src/app/models/inscripciones.interface';
 import { Component, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { InscripcionesService } from 'src/app/shared/services/inscripciones.service';
+import { InscripcionesService } from 'src/app/inscripciones/inscripciones.service';
 import { AlumnoSchema } from 'src/app/models/alumno.interface';
-import { AlumnosService } from 'src/app/shared/services/alumnos.service';
-import { CursosService } from 'src/app/shared/services/cursos.service';
+import { AlumnosService } from 'src/app/alumnos/alumnos.service';
+import { CursosService } from 'src/app/cursos/cursos.service';
 import { CursoSchema } from 'src/app/models/curso.interface';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Router } from '@angular/router';

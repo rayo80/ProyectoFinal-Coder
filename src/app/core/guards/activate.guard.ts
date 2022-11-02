@@ -14,8 +14,9 @@ export class ActivateGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (sessionStorage.getItem('usuario')==null) {
+    if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/login']);
+      alert("you don't have permission to access this page, please Log in")
       return false;
     }
     return true;

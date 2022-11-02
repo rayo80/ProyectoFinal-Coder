@@ -1,4 +1,4 @@
-import { AlumnosService } from '../../shared/services/alumnos.service';
+import { AlumnosService } from '../alumnos.service';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
