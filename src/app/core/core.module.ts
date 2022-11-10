@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
-import { AngularMaterialModule } from '../material/material.module';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -13,9 +13,9 @@ import { AppRoutingModule } from '../app-routing.module';
     SidenavComponent,
   ],
   imports: [
+    SharedModule,
     CommonModule,
     AppRoutingModule,
-    AngularMaterialModule
   ],
   exports: [
     NavigationBarComponent,

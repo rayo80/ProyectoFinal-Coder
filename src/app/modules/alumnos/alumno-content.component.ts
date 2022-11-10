@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AlumnoSchema } from '../models/alumno.interface';
+
 import { AlumnosService } from './alumnos.service';
 import { AlumnosFormComponent } from './alumnos-form/alumnos-form.component';
 import { AlumnosTableComponent } from './alumnos-table/alumnos-table.component';
+import { AlumnoSchema } from './alumno.interface';
 
 @Component({
   selector: 'app-alumno-content',

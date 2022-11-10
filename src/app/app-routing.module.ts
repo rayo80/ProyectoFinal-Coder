@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './core/components/home/home.component';
 import { ActivateGuard } from './core/guards/activate.guard';
 import { TeacherGuard } from './core/guards/role.guard';
-import { HomeComponent } from "./home/home.component";
+
 
 const routes: Routes = [
     {
@@ -16,12 +17,12 @@ const routes: Routes = [
     {
       path: "alumnos",
       canActivate: [ActivateGuard,],
-      loadChildren: () => import('./alumnos/alumnos.module').then((m) => m.AlumnosModule),
+      loadChildren: () => import('./modules/alumnos/alumnos.module').then((m) => m.AlumnosModule),
     },
     {
       path: "profesores",
       canActivate: [ActivateGuard, TeacherGuard],
-      loadChildren: () => import('./profesores/profesores.module').then((m) => m.ProfesoresModule),
+      loadChildren: () => import('./modules/profesores/profesores.module').then((m) => m.ProfesoresModule),
       data: {
         roles: ["profesor","admin"]
       }
@@ -29,7 +30,7 @@ const routes: Routes = [
     {
       path: "cursos",
       canActivate: [ActivateGuard, TeacherGuard],
-      loadChildren: () => import('./cursos/cursos.module').then((m) => m.CursosModule),
+      loadChildren: () => import('./modules/cursos/cursos.module').then((m) => m.CursosModule),
       data: {
         roles: ["profesor","admin"]
       }
@@ -37,7 +38,7 @@ const routes: Routes = [
     {
       path: "inscripciones",
       canActivate: [ActivateGuard],
-      loadChildren: () => import('./inscripciones/inscripciones.module').then((m) => m.InscripcionesModule),
+      loadChildren: () => import('./modules/inscripciones/inscripciones.module').then((m) => m.InscripcionesModule),
       data: {
         role: "admin"
       }
@@ -45,7 +46,7 @@ const routes: Routes = [
     {
       path: "usuarios",
       canActivate: [ActivateGuard,],
-      loadChildren: () => import('./usuarios/usuarios.module').then((m) => m.UsuariosModule),
+      loadChildren: () => import('./modules/usuarios/usuarios.module').then((m) => m.UsuariosModule),
       data: {
         role: "admin"
       }

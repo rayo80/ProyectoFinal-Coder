@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule} from '@angular/router';
 import { InscripcionesTableComponent } from './inscripciones-table/inscripciones-table.component';
 import { InscripcionesFormComponent } from './inscripciones-form/inscripciones-form.component';
-import { AngularMaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { inscripcionesRoutes } from './inscripciones.routing';
 import { InscripcionesComponent } from './inscripciones.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { InscripcionesComponent } from './inscripciones.component';
   imports: [
     RouterModule.forChild(inscripcionesRoutes),
     CommonModule,
-    AngularMaterialModule,
+    SharedModule,
     ReactiveFormsModule,
   ]
 

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { CursoSchema } from '../models/curso.interface';
+import { CursoSchema } from './curso.interface';
+
 
 @Injectable({
   providedIn: 'root'

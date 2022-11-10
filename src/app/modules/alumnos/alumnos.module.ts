@@ -5,9 +5,10 @@ import { AlumnosRoutingModule } from './alumnos-routing.module';
 import { AlumnosFormComponent } from './alumnos-form/alumnos-form.component';
 import { AlumnosTableComponent } from './alumnos-table/alumnos-table.component';
 import { AlumnoContentComponent } from './alumno-content.component';
-import { AngularMaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CustomModule } from '../shared/custom/custom.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { CustomModule } from 'src/app/shared/custom/custom.module';
+
 
 @NgModule({
   declarations: [
@@ -18,8 +19,7 @@ import { CustomModule } from '../shared/custom/custom.module';
   imports: [
     CommonModule,
     AlumnosRoutingModule,
-    AngularMaterialModule,
-    ReactiveFormsModule,
+    SharedModule,
     CustomModule,
   ],
   exports: [

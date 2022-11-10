@@ -48,4 +48,4 @@ const materialModules = [
     ...materialModules
   ],
 })
-export class AngularMaterialModule { }
+export class MaterialModule { }

@@ -5,18 +5,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
-import { AngularMaterialModule } from './material/material.module';
-import { HomeComponent } from './home/home.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 
 //ROUTING
 import { AppRoutingModule } from './app-routing.module';
-import { AlumnosRoutingModule } from './alumnos/alumnos-routing.module';
-import { ProfesoresRoutingModule } from './profesores/profesores-routing.module';
-import { CursosRoutingModule } from './cursos/cursos-routing.module';
-import { UsuariosRoutingModule } from './usuarios/usuarios-routing.module';
+
 import { LoginRoutingModule } from './login/login-routing.module';
+import { AlumnosRoutingModule } from './modules/alumnos/alumnos-routing.module';
+import { CursosRoutingModule } from './modules/cursos/cursos-routing.module';
+import { ProfesoresRoutingModule } from './modules/profesores/profesores-routing.module';
+import { UsuariosRoutingModule } from './modules/usuarios/usuarios-routing.module';
+import { HomeComponent } from './core/components/home/home.component';
+import { SharedModule } from './shared/shared.module';
 
 
 
@@ -31,9 +33,8 @@ import { LoginRoutingModule } from './login/login-routing.module';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AngularMaterialModule,
     CoreModule,
-  
+    SharedModule,
     AppRoutingModule,
     AlumnosRoutingModule,
     CursosRoutingModule,

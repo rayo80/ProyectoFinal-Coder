@@ -1,8 +1,8 @@
 import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LoginSchema, SessionSchema, UserLoginSchema } from 'src/app/models/user.interface';
-import { UserSchema } from 'src/app/models/user.interface';
+import { LoginSchema, SessionSchema, UserLoginSchema } from 'src/app/modules/usuarios/user.interface';
+import { UserSchema } from 'src/app/modules/usuarios/user.interface';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -56,7 +56,6 @@ export class AuthService {
 
   HaveRole(roleNames: any[]){
     let role = sessionStorage.getItem('role') 
-    console.log(role)
     if(roleNames.includes(role)){
       return true;
     }else if(role == "admin"){

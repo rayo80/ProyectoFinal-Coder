@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { InscripcionGETSchema, InscripcionSchema } from '../models/inscripciones.interface';
+import { InscripcionGETSchema, InscripcionSchema } from './inscripciones.interface';
+
 
 @Injectable({
   providedIn: 'root'

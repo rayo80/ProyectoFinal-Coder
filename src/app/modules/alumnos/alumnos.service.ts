@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { AlumnoSchema } from '../models/alumno.interface';
+import { AlumnoSchema } from './alumno.interface';
+
 
 @Injectable({
   providedIn: 'root'

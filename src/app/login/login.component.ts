@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SessionSchema, UserLoginSchema, UserSchema } from '../models/user.interface';
+import { SessionSchema, UserLoginSchema, UserSchema } from '../modules/usuarios/user.interface';
 import { AuthService } from '../shared/services/auth.service';
 
 @Component({

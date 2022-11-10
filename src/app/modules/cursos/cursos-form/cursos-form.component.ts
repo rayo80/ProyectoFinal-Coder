@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CursoSchema } from 'src/app/models/curso.interface';
-import { CursosService } from 'src/app/cursos/cursos.service';
+import { CursoSchema } from 'src/app/modules/cursos/curso.interface';
+import { CursosService } from '../cursos.service';
+
 
 @Component({
   selector: 'app-cursos-form',

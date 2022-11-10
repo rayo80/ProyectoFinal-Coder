@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidenavComponent } from '../core/components/sidenav/sidenav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { AngularMaterialModule } from '../material/material.module';
-
 import { AppRoutingModule } from '../app-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -14,7 +13,7 @@ import { AppRoutingModule } from '../app-routing.module';
   ],
   imports: [
     CommonModule,
-    AngularMaterialModule,
+    SharedModule,
     AppRoutingModule,
   ],
   exports:[

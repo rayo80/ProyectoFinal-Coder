@@ -2,8 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AlumnosService } from 'src/app/alumnos/alumnos.service';
-import { AlumnoSchema } from '../../models/alumno.interface';
+import { AlumnoSchema } from '../alumno.interface';
+import { AlumnosService } from '../alumnos.service';
+
 
 @Component({
   selector: 'app-alumnos-form',

@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { CursosService } from 'src/app/cursos/cursos.service';
-import { CursoSchema } from '../../models/curso.interface';
+import { CursoSchema } from '../curso.interface';
+import { CursosService } from '../cursos.service';
+
 
 @Component({
   selector: 'app-cursos-table',

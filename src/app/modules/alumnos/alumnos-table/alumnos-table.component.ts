@@ -2,8 +2,9 @@ import { AlumnosService } from '../alumnos.service';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { AlumnoSchema } from '../../models/alumno.interface'
+
 import { MatPaginator } from '@angular/material/paginator';
+import { AlumnoSchema } from 'src/app/modules/alumnos/alumno.interface';
 
 
 @Component({

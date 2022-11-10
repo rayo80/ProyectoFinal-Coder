@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { InscripcionGETSchema, InscripcionSchema } from 'src/app/models/inscripciones.interface';
-import { InscripcionesService } from 'src/app/inscripciones/inscripciones.service';
+import { InscripcionGETSchema, InscripcionSchema } from 'src/app/modules/inscripciones/inscripciones.interface';
+import { InscripcionesService } from '../inscripciones.service';
+
 
 @Component({
   selector: 'app-inscripciones-table',
