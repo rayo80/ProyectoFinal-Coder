@@ -5,7 +5,7 @@ import { CursosRoutingModule } from './cursos-routing.module';
 import { CursosComponent } from './cursos.component';
 import { CursosTableComponent } from './cursos-table/cursos-table.component';
 import { CursosFormComponent } from './cursos-form/cursos-form.component';
-import { AngularMaterialModule } from '../modules/material.module';
+import { AngularMaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 

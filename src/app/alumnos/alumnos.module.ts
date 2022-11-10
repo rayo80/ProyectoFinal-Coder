@@ -5,7 +5,7 @@ import { AlumnosRoutingModule } from './alumnos-routing.module';
 import { AlumnosFormComponent } from './alumnos-form/alumnos-form.component';
 import { AlumnosTableComponent } from './alumnos-table/alumnos-table.component';
 import { AlumnoContentComponent } from './alumno-content.component';
-import { AngularMaterialModule } from '../modules/material.module';
+import { AngularMaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomModule } from '../shared/custom/custom.module';
 
