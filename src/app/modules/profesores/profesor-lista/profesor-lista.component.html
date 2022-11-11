@@ -1,0 +1,41 @@
+
+<div class="d-flex justify-content-between">
+    <h1 class="d-inline-block ">Lista de profesores</h1>
+
+        <button mat-raised-button color="primary"
+        (click)="onAdd()">
+            Crear Profesor
+        </button>
+
+</div>
+<div class="row">
+
+
+    <div *ngFor="let profesor of profesores$ | async" class="col-md-3 my-3">
+        <mat-card >
+            <mat-card-header>
+                <mat-card-title>{{ profesor.name }}</mat-card-title>
+                <mat-card-subtitle>{{ profesor.apellidos }}</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <p>Edad: {{ profesor.edad }}</p>
+
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+                <button mat-icon-button [routerLink]="'/cursos/'+profesor.id">
+                    <mat-icon>visibility</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" (click)="editarProfesor(profesor)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="eliminarProfesor(profesor)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-card-actions>
+            
+        </mat-card>
+    </div>
+</div>

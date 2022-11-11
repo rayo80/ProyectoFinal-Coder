@@ -1,0 +1,39 @@
+
+<h3>Agregar curso</h3>
+
+<form [formGroup]="formulario" (ngSubmit)="agregarProfesor()">
+        <div class="col-md-4">
+            <mat-form-field appearance="fill" class="fill">
+                <mat-label>Nombre del profesor</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill" class="fill">
+                <mat-label>Apellidos</mat-label>
+                <input matInput formControlName="apellidos">
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill" class="fill">
+                <mat-label>Edad del profesor</mat-label>
+                <input matInput formControlName="edad">
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill" class="fill">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+            </mat-form-field>
+        </div>
+
+
+
+        <div class="col-md-12">
+            <button mat-raised-button color="primary" type="submit" class="fill">Agregar Profesor</button>
+        </div>
+
+</form>

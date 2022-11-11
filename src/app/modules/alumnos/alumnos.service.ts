@@ -11,7 +11,6 @@ export class AlumnosService {
   constructor(private http: HttpClient){ }
   root_url = 'https://62ae1b79b735b6d16a3eee06.mockapi.io/aula/alumno/'
   alumnoslist=<any>[];
-  index=0;
   alumnoToEdit:AlumnoSchema | null;
   alumnoToDelete:any;
 
