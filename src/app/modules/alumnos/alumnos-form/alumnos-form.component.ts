@@ -23,14 +23,17 @@ export class AlumnosFormComponent implements OnInit {
 
   addAlumno(alumno:AlumnoSchema){
     this.alumnosService.createApiStudent(alumno)
-    .subscribe(
-      data=>{
-        // es necesario que el cambio se realice aca porque 
-        // esto es asincrono asi que podria ser que se cambie 
-        // y todavia no se ha terminado el proceso en este observable        
-        this.dialogRef.close();;
-      }
-    )
+    .subscribe({
+      next:
+        data=>{
+          // es necesario que el cambio se realice aca porque 
+          // esto es asincrono asi que podria ser que se cambie 
+          // y todavia no se ha terminado el proceso en este observable        
+          this.dialogRef.close();
+          // update la lista de items
+        },
+
+      })
   }
 
   updateAlumno(alumno:AlumnoSchema){
@@ -45,6 +48,7 @@ export class AlumnosFormComponent implements OnInit {
     this.alumnosService.getStudentToEdit().subscribe(
       val=>this.alumnoToEdit = val
   )}
+
 
   ngOnInit(): void {
     this.formAlumnos = this.fbuild.group({
