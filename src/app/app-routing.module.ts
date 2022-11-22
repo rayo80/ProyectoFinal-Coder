@@ -16,7 +16,7 @@ const routes: Routes = [
     },
     {
       path: "alumnos",
-      canActivate: [ActivateGuard, RoleGuard],
+      canActivate: [ActivateGuard],
       loadChildren: () => import('./modules/alumnos/alumnos.module').then((m) => m.AlumnosModule),
       data: {
         roles: ["profesor", "admin"]
