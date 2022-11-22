@@ -56,7 +56,6 @@ export class LoginComponent implements OnInit {
   private correctLogin(data: UserSchema){
     
     sessionStorage.setItem('usuario', data.username);
-    //sessionStorage.setItem('token', data.token)
     sessionStorage.setItem('role', data.is_admin? 'admin': 'invitado' );
     this.router.navigate(['/']);
   }

@@ -19,7 +19,7 @@ const routes: Routes = [
       canActivate: [ActivateGuard, RoleGuard],
       loadChildren: () => import('./modules/alumnos/alumnos.module').then((m) => m.AlumnosModule),
       data: {
-        roles: ["profesor"]
+        roles: ["profesor", "admin"]
       }
     },
     {
@@ -40,7 +40,7 @@ const routes: Routes = [
     },
     {
       path: "inscripciones",
-      canActivate: [ActivateGuard],
+      canActivate: [ActivateGuard, RoleGuard],
       loadChildren: () => import('./modules/inscripciones/inscripciones.module').then((m) => m.InscripcionesModule),
       data: {
         roles: "admin"
@@ -54,6 +54,8 @@ const routes: Routes = [
         roles: []
       }
     },
+    { path: '', redirectTo: 'login', pathMatch: 'full'},
+    { path: '**', component: HomeComponent }
 ];
 
 @NgModule({
