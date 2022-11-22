@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UsuariosComponent } from './usuarios.component';
+import { UsuariosTableComponent } from './usuarios-table/usuarios-table.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: UsuariosComponent,
+    component: UsuariosTableComponent,
   }
 ];
 

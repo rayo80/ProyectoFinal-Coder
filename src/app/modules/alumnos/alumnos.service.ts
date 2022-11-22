@@ -33,10 +33,11 @@ export class AlumnosService {
 
   createApiStudent(alumno:AlumnoSchema):Observable<AlumnoSchema>{
     return this.http.post<AlumnoSchema>(this.root_url, alumno)
-           .pipe(
-            tap((res)=>this.alumnos.next([...this.alumnos.value,res]))
-           )
+            .pipe(
+              tap((res)=>this.alumnos.next([...this.alumnos.value,res]))
+            )
   }
+
   updateApiStudent(alumno:AlumnoSchema):Observable<AlumnoSchema>{
     return this.http.put<AlumnoSchema>(this.root_url+alumno.id, alumno)
             .pipe(

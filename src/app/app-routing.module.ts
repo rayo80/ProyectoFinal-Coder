@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './core/components/home/home.component';
 import { ActivateGuard } from './core/guards/activate.guard';
-import { TeacherGuard } from './core/guards/role.guard';
+import { RoleGuard } from './core/guards/role.guard';
 
 
 const routes: Routes = [
@@ -16,23 +16,26 @@ const routes: Routes = [
     },
     {
       path: "alumnos",
-      canActivate: [ActivateGuard,],
+      canActivate: [ActivateGuard, RoleGuard],
       loadChildren: () => import('./modules/alumnos/alumnos.module').then((m) => m.AlumnosModule),
+      data: {
+        roles: ["profesor"]
+      }
     },
     {
       path: "profesores",
-      canActivate: [ActivateGuard, TeacherGuard],
+      canActivate: [ActivateGuard, RoleGuard],
       loadChildren: () => import('./modules/profesores/profesores.module').then((m) => m.ProfesoresModule),
       data: {
-        roles: ["profesor","admin"]
+        roles: ["profesor", "admin"]
       }
     },
     {
       path: "cursos",
-      canActivate: [ActivateGuard, TeacherGuard],
+      canActivate: [ActivateGuard, RoleGuard],
       loadChildren: () => import('./modules/cursos/cursos.module').then((m) => m.CursosModule),
       data: {
-        roles: ["profesor","admin"]
+        roles: ["profesor", "admin"]
       }
     },
     {
@@ -40,15 +43,15 @@ const routes: Routes = [
       canActivate: [ActivateGuard],
       loadChildren: () => import('./modules/inscripciones/inscripciones.module').then((m) => m.InscripcionesModule),
       data: {
-        role: "admin"
+        roles: "admin"
       }
     },
     {
       path: "usuarios",
-      canActivate: [ActivateGuard,],
+      canActivate: [ActivateGuard, RoleGuard],
       loadChildren: () => import('./modules/usuarios/usuarios.module').then((m) => m.UsuariosModule),
       data: {
-        role: "admin"
+        roles: []
       }
     },
 ];

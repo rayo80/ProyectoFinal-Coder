@@ -55,6 +55,7 @@ export class AuthService {
 
 
   HaveRole(roleNames: any[]){
+    console.log(roleNames);
     let role = sessionStorage.getItem('role') 
     if(roleNames.includes(role)){
       return true;
