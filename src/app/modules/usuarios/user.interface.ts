@@ -22,3 +22,28 @@ export interface SessionSchema{
     username: string;
     role: string;
 }
+
+export interface SvUserSchema{
+    id: number;
+    name: string;
+    apellidos: string;
+    edad: number;
+    email: string;
+}
+
+export class UserModel{
+    id: number;
+    name: string;
+    apellidos: string;
+    edad: number;
+    email: string;
+
+    constructor(data: SvUserSchema){
+        this.id = data.id;
+        this.name = data.name;
+        this.apellidos = data.apellidos;
+        this.edad = data.edad;
+        this.email = data.email;
+    }
+
+}

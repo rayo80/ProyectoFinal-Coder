@@ -1,12 +1,7 @@
+import { IListColums } from './../../plantillas/list-base/list-base.types';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
-import { AlumnoSchema } from '../../alumnos/alumno.interface';
-import { ProfesorSchema } from '../../profesores/profesor.interface';
-import { ProfesoresService } from '../../profesores/profesores.service';
+import { UsuariosService } from '../usuarios.service';
 
 @Component({
   selector: 'app-usuarios-table',
@@ -14,49 +9,44 @@ import { ProfesoresService } from '../../profesores/profesores.service';
   styleUrls: ['./usuarios-table.component.scss']
 })
 export class UsuariosTableComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatTable) table: MatTable<ProfesorSchema>;
-  @ViewChild(MatSort) sort: MatSort;
-  hasDetroyed$ = new Subject<boolean>();
-  profesores = new MatTableDataSource<AlumnoSchema>();
 
   constructor(
-    private profesorService: ProfesoresService,
-    private router: Router
+    private router: Router,
+    private _usuariosService: UsuariosService,
   ) { }
 
-  getProfesores(){
-    this.profesorService.getProfesores()
-      .pipe(takeUntil(this.hasDetroyed$))
-      .subscribe(
-        (val)=>this.profesores.data=val
-      )
-  }
-  displayedColumns: string[] = ['id', 'name', 'apellido',
-  'email', 'edad', 'ver mas'];
+  usuariosService = this._usuariosService;
+
+  optionsColumns: string[] = ['Detalle'];
+
+
+  // el campo code usualmente se saca de la data misma
+  // cuando se pinta la data misma
+  userColumns: IListColums[] =[
+    { 
+      'name': 'ID',
+      'code': 'id',
+    },
+    {
+      'name': 'Name',
+      'code': 'name',
+    },
+    {      
+      'name': 'Apellido',
+      'code': 'apellidos',
+    },
+    {
+      'name': 'Email',
+      'code': 'email',
+    },
+    {
+      'name': 'Edad',
+      'code': 'edad',
+    }
+  ]
 
   ngOnInit(): void {
-    this.getProfesores()
+
   }
   
-  onDelete(elemento:AlumnoSchema){
-    
-  }
-
-  onDetail(elemento:AlumnoSchema){
-
-  }
-
-  onCreate(){
-
-  }
-
-  onUpdate(elemento:AlumnoSchema){
-
-  }
-
-  ngOnDestroy(){
-    this.hasDetroyed$.next(true);
-    this.hasDetroyed$.complete();
-  }
 }
