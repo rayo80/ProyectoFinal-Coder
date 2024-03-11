@@ -18,16 +18,43 @@ export interface InscripcionGETSchema{
 
 export interface InscripcionSchema{
     id: number;
-    codigo: string;
+    monto: string;
     alumno: number;
     fecha: Date;
     curso: number;
 }
 
-export interface InscripcionesSchema{
+export interface SvInscripcionSchema{
     id: number;
-    codigo: string;
-    alumno: number;
-    curso: number;
+    monto: number;
+    student: AlumnoInscripcionSchema;
+    course: CursoInscripcionSchema;
     fecha: string;
+}
+
+export class InscripcionModel {
+    id: number;
+    monto: number;
+    alumno: AlumnoInscripcionSchema;
+    curso: CursoInscripcionSchema;
+    fecha: string;
+    
+    constructor(data: SvInscripcionSchema){
+        this.id = data.id;
+        this.curso = data.course;
+        this.monto = data.monto;
+        this.alumno = data.student;
+        this.fecha = data.fecha;
+
+    }
+
+    
+    get alumnoName() : string {
+        return this.alumno.name;
+    }
+
+    get cursoName() : string {
+        return this.curso.name;
+    }
+
 }

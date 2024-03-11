@@ -17,7 +17,8 @@ export class AlumnosFormComponent implements OnInit {
   error=false
 
   constructor(
-    private fbuild: FormBuilder, private alumnosService: AlumnosService,
+    private fbuild: FormBuilder, 
+    private alumnosService: AlumnosService,
     public dialogRef:MatDialogRef<AlumnosFormComponent>
   ) { }
 
@@ -53,8 +54,11 @@ export class AlumnosFormComponent implements OnInit {
   ngOnInit(): void {
     this.formAlumnos = this.fbuild.group({
       name: ['', [Validators.required]],
-      apellidos: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
+      last_name: ['', [Validators.required]],
+      email: ['', [Validators.required, 
+                  Validators.pattern("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+\\.[a-z]{2,4}$")]],
+      codigo: ['', [Validators.required]],
+      address: ['', [Validators.required]],
       edad:['',[Validators.required, Validators.maxLength(2)]],
     });
     
@@ -62,8 +66,10 @@ export class AlumnosFormComponent implements OnInit {
     
     if(this.alumnoToEdit){
       this.formAlumnos.get('name')?.patchValue(this.alumnoToEdit.name);
-      this.formAlumnos.get('apellidos')?.patchValue(this.alumnoToEdit.apellidos);
+      this.formAlumnos.get('last_name')?.patchValue(this.alumnoToEdit.last_name);
       this.formAlumnos.get('email')?.patchValue(this.alumnoToEdit.email);
+      this.formAlumnos.get('address')?.patchValue(this.alumnoToEdit.address);
+      this.formAlumnos.get('codigo')?.patchValue(this.alumnoToEdit.codigo);
       this.formAlumnos.get('edad')?.patchValue(this.alumnoToEdit.edad);
     }
   }

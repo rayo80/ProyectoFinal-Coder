@@ -4,7 +4,7 @@
   
         <button mat-raised-button color="primary"
         (click)="onCreate()">
-            Crear Alumno
+            Crear {{title}}
         </button>
 </div>
   
@@ -19,7 +19,7 @@
                 mat-header-cell
                 mat-sort-header
                 *matHeaderCellDef>
-                {{'campo' + field.name}}
+                {{field.name}}
             </th>
             <td
                 mat-cell
@@ -67,7 +67,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+    <mat-paginator [pageSizeOptions]="[8, 16, 32, 64]"
      aria-label="Select page of students">
     </mat-paginator>
   </div>

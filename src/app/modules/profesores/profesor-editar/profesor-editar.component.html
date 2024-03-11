@@ -1,1 +1,38 @@
-<p>profesor-editar works!</p>
+
+<h3>Agregar Profesor</h3>
+
+<form [formGroup]="formulario" (ngSubmit)="save()">
+    <div class="col-md-4">
+        <mat-form-field appearance="fill" class="fill">
+            <mat-label>Nombre del profesor</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-4">
+        <mat-form-field appearance="fill" class="fill">
+            <mat-label>codigo</mat-label>
+            <input matInput formControlName="codigo">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-4">
+        <mat-form-field appearance="fill" class="fill">
+            <mat-label>Formacion del profesor</mat-label>
+            <input matInput formControlName="formacion">
+        </mat-form-field>
+    </div>
+    
+
+    <div class="col-md-4">
+        <mat-form-field appearance="fill" class="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+        <button mat-raised-button color="primary" type="submit" class="fill">Agregar Profesor</button>
+    </div>
+
+</form>

@@ -1,10 +1,13 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Subject, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
+import { Subject, switchMap, takeUntil } from 'rxjs';
 import { AbsListBaseService } from '../list-base.service';
-import { IListColums } from './list-base.types';
+import { ModalBaseComponent } from '../modal-base/modal-base.component';
+import { IListColums, ModelId } from './list-base.types';
 
 @Component({
   selector: 'app-list-base',
@@ -12,36 +15,68 @@ import { IListColums } from './list-base.types';
   styleUrls: ['./list-base.component.scss']
 })
 
-export class ListBaseComponent<IModel, Response>
+export class ListBaseComponent<IModel extends ModelId, Response>
     implements OnInit, OnDestroy{
-        // necesito que me manden el servicio que extendera de una clase abstracta
+  // necesito que me manden el servicio que extendera de una clase abstracta
   // por lo que tendra los atributos que necesito
-  @Input() service: AbsListBaseService<IModel, Response>;
+  @Input() service: AbsListBaseService<IModel , Response>;
   @Input() title: string;
   @Input() fieldsHeader: IListColums[];
   @Input() tableActions: string[];
+  @Input() detailUrl: string;
+  @Input() modal: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<IModel[]>;
   @ViewChild(MatSort) sort: MatSort;
+
 
   items = new MatTableDataSource<IModel>();
   hasDetroyed$ = new Subject<boolean>();
 
   displayedColumns: string[] = [];
 
-  constructor() { }
+
+  constructor(public _dialog: MatDialog,
+              private router: Router) { }
 
   ngOnInit(): void {
-    this.service.getList().subscribe()
-    this.getItems()
+    this.getAPIItems()
     this.asignarColumnas()
   }
 
+  openModal(){
+    if(this.modal != null){
+      const dialogRef = this._dialog.open(this.modal,{
+        autoFocus: false,
+      });
+      
+      dialogRef.afterClosed()
+      .pipe(
+        takeUntil(this.hasDetroyed$),
+        switchMap(() => {return this.service.items})
+      )
+      .subscribe((data) =>(this.items.data = data))
+    }
+    else{
+      alert("Debe agregar un modal")
+    }
+  }
+  
+
   asignarColumnas(){
+    
     this.displayedColumns = this.fieldsHeader.map(item=>item.name)
     this.displayedColumns = [...this.displayedColumns, ...this.tableActions]
   }
 
+
+  getAPIItems(){
+    this.service.getList()
+      .pipe(takeUntil(this.hasDetroyed$))
+      .subscribe(
+        (val)=>this.items.data=val
+    )
+  }
 
   getItems(){
     this.service.items
@@ -51,27 +86,35 @@ export class ListBaseComponent<IModel, Response>
     )
   }
 
-
   ngOnDestroy(): void {
+    console.log(this.items.data)
     this.hasDetroyed$.next(true);
     this.hasDetroyed$.complete();
   }
 
   ngAfterViewInit(){
+  
     this.items.paginator = this.paginator;
     this.items.sort = this.sort;
   }
 
   onCreate(): void {
-    console.log("createing")
+    // le mandamos null al item de edicion
+    console.log("aca falla one Item ya es null")
+    this.service.oneItem.next(null);
+    this.openModal()
   }
-  onDetail(data: IModel){
-    console.log("Detallando")
+
+  onDetail(elemento: IModel){
+    this.router.navigate([this.detailUrl, elemento.id]);
   }
+
   onUpdate(data: IModel){
-    console.log("onUpdate")
+    this.service.oneItem.next(data);
+    this.openModal()
   }
+  
   onDelete(data: IModel){
-    console.log("hola")
+
   }
 }

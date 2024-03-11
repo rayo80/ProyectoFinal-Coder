@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { CursoSchema } from '../curso.interface';
-import { CursosService } from '../cursos.service';
+import { IListColums } from '../../plantillas/list-base/list-base.types';
+import { CursosService } from '../curso.service';
+import { CursosFormComponent } from '../cursos-form/cursos-form.component';
 
 
 @Component({
@@ -10,60 +12,47 @@ import { CursosService } from '../cursos.service';
   templateUrl: './cursos-table.component.html',
   styleUrls: ['./cursos-table.component.scss']
 })
-export class CursosTableComponent implements OnInit, AfterViewInit {
-  constructor(private cursosService: CursosService) { }
-  //variables para leer los servicios
-  cursos: CursoSchema[];
-  //ocultar la pestaña
-  @Output() OcultarTabla= new EventEmitter<any>();
-  //variables para tabla
-  displayedColumns: string[] = ['id', 'name', 'codigo', 'horario', 'profesor', 'editar','eliminar'];
-  @ViewChild(MatTable) table: MatTable<CursoSchema>;
-  dataSource = new MatTableDataSource<CursoSchema>();
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+export class CursosTableComponent{
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
 
-  //FUNCIONES QUE NOS CONECTAN CON EL SERVICIO
-  getCursos(){
-    this.cursosService.getCursosList().subscribe(
-      (val)=>{
-        //uno es un simple array que renderiza la tabla
-        // y el segundo es un objeto al que le podemos aplicar
-        // paginaciones en el modulo Alumnos ya no hago esta separacion.
-        this.cursos=val;
-        this.dataSource.data=this.cursos;
-      }
-    )
-  }
-  deleteCurso(elemento:CursoSchema){
-    this.cursosService.deleteCurso(elemento).subscribe(
-      val=>{
-        this.getCursos();
-      }
-    )
-  }
+  constructor(
+    private _cursosService: CursosService,
+  ) { }
 
-  ngOnInit(): void {
-    this.getCursos();
-  }
 
-  onUpdate(elemento:CursoSchema){
+  cursosService=this._cursosService;
+  optionsColumns: string[] = ['Editar', 'Eliminar'];
+  cursoColumns: IListColums[] =[
+    { 
+      'name': 'ID',
+      'code': 'id',
+    },
+    {
+      'name': 'Name',
+      'code': 'name',
+    },
+    {      
+      'name': 'Horario',
+      'code': 'horario',
+    },
+    {
+      'name': 'Codigo',
+      'code': 'codigo',
+    },
+    {
+      'name': 'Profesor',
+      'code': 'teacherName',
+    },
+    {
+      'name': 'FechaInicio',
+      'code': 'start_date',
+    },
+    {
+      'name': 'FechaFinal',
+      'code': 'end_date',
+    }
+  ]
 
-    //ahora este lo enviamos a nuestro formulario
-    this.cursosService.cursoToEdit=elemento;
-    this.OcultarTabla.emit(true);
-    this.table.renderRows();
-  }
-
-  onDelete(elemento:CursoSchema){
-    this.deleteCurso(elemento);
-  }
-
-  onAdd() {
-    //al hacer click ocultamos nuestra tabla y mostramos solo el formulario
-    this.OcultarTabla.emit(true);
-  }
+  modalCursos = CursosFormComponent
+  
 }

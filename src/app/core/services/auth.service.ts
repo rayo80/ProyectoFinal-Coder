@@ -59,7 +59,6 @@ export class AuthService {
     let role = sessionStorage.getItem('role')
     console.log(role);
     if(roleNames.includes(role)){
-      console.log("entre aca")
       return true;
     }else if(role == "admin"){
       return true;

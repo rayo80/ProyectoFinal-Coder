@@ -10,33 +10,36 @@ import { ProfesoresService } from '../profesores.service';
   styleUrls: ['./profesor-agregar.component.scss']
 })
 export class ProfesorAgregarComponent implements OnInit {
-  formulario: FormGroup;
 
+  formulario = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    codigo: new FormControl(),
+    formacion: new FormControl(),
+    email: new FormControl(),
+    picture: new FormControl(),
+  });
   constructor(
     private profesorService: ProfesoresService,
     private router: Router
   ) {
-    this.formulario = new FormGroup({
-      name: new FormControl('Pepe', [Validators.required]),
-      apellidos: new FormControl(),
-      edad: new FormControl(),
-      email: new FormControl(),
-    });
   }
 
-  agregarProfesor(){
+  save(){
     const profesor: any = {
       name: this.formulario.value.name,
-      apellidos: this.formulario.value.apellidos,
-      edad: this.formulario.value.edad,
+      codigo: this.formulario.value.codigo,
+      formacion: this.formulario.value.formacion,
       email: this.formulario.value.email,
+      picture: this.formulario.value.picture,
     };
     console.log(profesor);
     this.profesorService.createProfesor(profesor);
-    this.router.navigate(['profesores/listar']); 
+    this.router.navigate(['profesores/listar']);
+
   }
 
   ngOnInit(): void {
+
   }
 
 }

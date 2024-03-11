@@ -1,0 +1,15 @@
+<div [formGroup]="form">
+    <mat-form-field appearance="fill">
+        <mat-label>{{label}}</mat-label>
+        
+        <mat-select 
+            [formControlName]="formName"
+            [placeholder]="label"
+            >
+            <mat-option *ngFor="let item of items" [value]="item?.id">
+              {{item?.label}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="required">Este campo es obligatorio:{{items}}</mat-error>
+    </mat-form-field>
+</div>

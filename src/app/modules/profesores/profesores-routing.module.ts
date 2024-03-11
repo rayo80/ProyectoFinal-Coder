@@ -7,7 +7,8 @@ import { ProfesorInicioComponent } from './profesor-inicio/profesor-inicio.compo
 import { ProfesorListaComponent } from './profesor-lista/profesor-lista.component';
 
 const routes: Routes = [
-  { path: '', component: ProfesorInicioComponent, children: [
+  { path: '', component: ProfesorInicioComponent,
+    children: [
     { path: 'listar', component: ProfesorListaComponent },
     { path: 'editar', component: ProfesorEditarComponent },
     { path: 'agregar', component: ProfesorAgregarComponent},

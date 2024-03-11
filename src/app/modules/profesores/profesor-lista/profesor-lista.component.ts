@@ -31,6 +31,6 @@ export class ProfesorListaComponent implements OnInit {
     this.router.navigate(['profesores/editar', profesor]);
   }
   onAdd(){
-    this.router.navigate(['./agregar'])
+    this.router.navigate(['profesores/agregar'])
   }
 }

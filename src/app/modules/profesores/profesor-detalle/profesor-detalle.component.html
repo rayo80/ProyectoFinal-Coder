@@ -1,1 +1,18 @@
-<p>profesor-detalle works!</p>
+<div class="d-flex justify-content-between pb-4">
+    <h1 class="d-inline-block ">Detalle</h1>
+  
+        <button mat-raised-button color="primary"
+        (click)="regresar()">
+            Volver a la Lista
+        </button>
+  </div>
+<mat-list>
+    <mat-list-item>id: {{item.id}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>name: {{item.name}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>email: {{item.email}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>apellidos: {{item.apellidos}}</mat-list-item>
+    <mat-divider></mat-divider>
+</mat-list>

@@ -1,43 +1,75 @@
-<form [formGroup]="formCursos" (ngSubmit)="onSubmit()">
-    <div>
-        <mat-form-field appearance="fill">
-            <mat-label>Nombre</mat-label>
-            <input formControlName="name" matInput>
-            <mat-error *ngIf="formCursos.get('name')?.errors?.['required']"
+<app-modal-base
+    title="Cursos"
+    [service]="cursosService"
+    [modalForm]="formCursos">
+  <ng-container>
+    <form [formGroup]="formCursos" (ngSubmit)="save()">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre</mat-label>
+                <input formControlName="name" matInput>
+                <mat-error *ngIf="formCursos.get('name')?.errors?.['required']"
+                [style.font-size]="'x-smaller'"
+                >Campo requerido</mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Codigo</mat-label>
+            <input formControlName="codigo" matInput>
+            <mat-error *ngIf="formCursos.get('codigo')?.errors?.['required']"
             [style.font-size]="'x-smaller'"
             >Campo requerido</mat-error>
-        </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="fill">
-        <mat-label>Codigo</mat-label>
-        <input formControlName="codigo" matInput>
-        <mat-error *ngIf="formCursos.get('codigo')?.errors?.['required']"
-        [style.font-size]="'x-smaller'"
-        >Campo requerido</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="example-container">
-        <mat-form-field appearance="fill">
-          <mat-label>Horario</mat-label>
-          <input formControlName="horario" matInput>
-          <mat-error *ngIf="formCursos.get('horario')?.errors?.['required']"
-          [style.font-size]="'x-smaller'"
-          >Campo Requerido</mat-error>
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Profesor</mat-label>
-          <input formControlName="profesor" matInput>
-          <mat-error *ngIf="formCursos.get('profesor')?.errors?.['required']"
-          [style.font-size]="'x-smaller'"
-          >Campo requerido</mat-error>
-        </mat-form-field>
-      </div>
+          </mat-form-field>
+        </div>
+        <div class="example-container">
+            <mat-form-field appearance="fill">
+              <mat-label>Horario</mat-label>
+              <input formControlName="horario" matInput>
+              <mat-error *ngIf="formCursos.get('horario')?.errors?.['required']"
+              [style.font-size]="'x-smaller'"
+              >Campo Requerido</mat-error>
+            </mat-form-field>
+        </div>
 
-    <button mat-raised-button color="primary">Submit</button>
-    <div class="alert alert-danger" *ngIf="error">
-        Los campos no han sido rellanados correctamente
-    </div>
-</form>
+        <!--
+        <div>
+          <mat-form-field appearance="fill">
+              <mat-label>Select Profesor</mat-label>
+              <mat-select formControlName="teacher">
+                  <mat-option *ngFor="let profesor of profesores" [value]="profesor.id">
+                    {{profesor.name}}
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        -->
+        
+        <app-select-base
+          [service]="profesorService"
+          [form]="formCursos"
+          formName="teacher"
+          label="name">
+        </app-select-base>
+
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Choose date</mat-label>
+            <input formControlName="start_date" matInput [matDatepicker]="picker1">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Choose date</mat-label>
+            <input formControlName="end_date" matInput [matDatepicker]="picker2">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
+    </form>
+  </ng-container>
+</app-modal-base>

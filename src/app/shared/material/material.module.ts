@@ -16,8 +16,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatSortModule} from '@angular/material/sort';
+import { MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSortModule} from '@angular/material/sort';
 
 const materialModules = [
   MatButtonModule,

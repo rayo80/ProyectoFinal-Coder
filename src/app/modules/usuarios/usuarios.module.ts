@@ -5,12 +5,14 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { CustomModule } from 'src/app/shared/custom/custom.module';
 import { ListBaseModule } from '../plantillas/list-base/list-base.module';
+import { UsuarioDetailComponent } from './usuario-detail/usuario-detail.component';
 
 
 
 @NgModule({
   declarations: [
-    UsuariosTableComponent
+    UsuariosTableComponent,
+    UsuarioDetailComponent
   ],
   imports: [
     CommonModule,

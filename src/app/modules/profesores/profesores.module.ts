@@ -8,7 +8,6 @@ import { ProfesorDetalleComponent } from './profesor-detalle/profesor-detalle.co
 import { ProfesorInicioComponent } from './profesor-inicio/profesor-inicio.component';
 import { ProfesorListaComponent } from './profesor-lista/profesor-lista.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ProfesorFormComponent } from './profesor-form/profesor-form.component';
 
 
 @NgModule({
@@ -18,7 +17,6 @@ import { ProfesorFormComponent } from './profesor-form/profesor-form.component';
     ProfesorDetalleComponent,
     ProfesorInicioComponent,
     ProfesorListaComponent,
-    ProfesorFormComponent
   ],
   imports: [
     CommonModule,

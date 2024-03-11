@@ -18,7 +18,10 @@ import { MatSort } from '@angular/material/sort';
 })
 export class AlumnosTableComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private router: Router, private alumnosService: AlumnosService) { }
+  constructor(
+    public dialog: MatDialog, 
+    private router: Router, 
+    private alumnosService: AlumnosService) { }
 
   hasDetroyed$ = new Subject<boolean>();
   //Tabla y paginación
@@ -27,8 +30,8 @@ export class AlumnosTableComponent implements OnInit {
   @ViewChild(MatTable) table: MatTable<AlumnoSchema>;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['id', 'name', 'apellido', 'complete',
-                                'email', 'edad', 'editar', 'eliminar', 'ver mas'];
+  displayedColumns: string[] = ['id', 'name', 'last_name', 'complete', 'codigo',
+                                'email', 'edad', 'address', 'editar', 'eliminar', 'ver mas'];
 
   getAlumnos(){
     this.alumnosService.alumnos

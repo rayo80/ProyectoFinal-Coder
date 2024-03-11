@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, Subject, tap } from 'rxjs';
 import { AlumnoSchema } from './alumno.interface';
-
+import { environment } from './../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlumnosService {
   constructor(private http: HttpClient){ }
-  root_url = 'https://62ae1b79b735b6d16a3eee06.mockapi.io/aula/alumno/'
+  root_url = environment.url+'/api/matricula/alumno'
   //alumnos:AlumnoSchema[];
   alumnos: BehaviorSubject<AlumnoSchema[]> = new BehaviorSubject<AlumnoSchema[]>([]);
   alumnoToEdit:AlumnoSchema | null;
@@ -28,7 +28,7 @@ export class AlumnosService {
 
 
   getSingleStudent(id:number):Observable<AlumnoSchema> {
-    return this.http.get<AlumnoSchema>(this.root_url+id)
+    return this.http.get<AlumnoSchema>(this.root_url+'/'+id)
   }
 
   createApiStudent(alumno:AlumnoSchema):Observable<AlumnoSchema>{
@@ -39,7 +39,7 @@ export class AlumnosService {
   }
 
   updateApiStudent(alumno:AlumnoSchema):Observable<AlumnoSchema>{
-    return this.http.put<AlumnoSchema>(this.root_url+alumno.id, alumno)
+    return this.http.put<AlumnoSchema>(this.root_url+'/'+alumno.id, alumno)
             .pipe(
               tap((res)=>{
                 const newAlum = this.alumnos.value.filter(a=>a.id != alumno.id);
@@ -49,7 +49,7 @@ export class AlumnosService {
   }
 
   deleteStudent(alumno: AlumnoSchema):Observable<AlumnoSchema> {
-    return this.http.delete<AlumnoSchema>(this.root_url+alumno.id)
+    return this.http.delete<AlumnoSchema>(this.root_url+'/'+alumno.id)
             .pipe(
               tap(()=>{
                 const newAlum = this.alumnos.value.filter(a=>a.id != alumno.id);

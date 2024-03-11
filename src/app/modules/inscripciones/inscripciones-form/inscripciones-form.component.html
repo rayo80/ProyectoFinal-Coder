@@ -3,8 +3,8 @@
 
     <div>
         <mat-form-field appearance="fill">
-            <mat-label>Codigo de Inscripcion</mat-label>
-            <input formControlName="codigo" matInput>
+            <mat-label>Monto a pagar</mat-label>
+            <input formControlName="monto" matInput>
             <mat-error *ngIf="formInscripciones.get('name')?.errors?.['required']"
             [style.font-size]="'x-smaller'"
             >Campo requerido</mat-error>

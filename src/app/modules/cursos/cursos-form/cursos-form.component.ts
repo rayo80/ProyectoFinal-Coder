@@ -1,7 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { CursoSchema } from 'src/app/modules/cursos/curso.interface';
-import { CursosService } from '../cursos.service';
+import { ProfesorSchema } from '../../profesores/profesor.interface';
+import { ProfesoresService } from '../../profesores/profesor.service';
+import { CursosService } from '../curso.service';
 
 
 @Component({
@@ -10,62 +13,56 @@ import { CursosService } from '../cursos.service';
   styleUrls: ['./cursos-form.component.scss']
 })
 export class CursosFormComponent implements OnInit {
-  formCursos:FormGroup;
-  cursoToEdit:any; //cursoto Edit
-  error = false
-  @Output() VerForm= new EventEmitter<any>();
-  constructor( private fbuild: FormBuilder, private cursosService: CursosService,
+
+  cursoToEdit:any; //curso to Edit
+
+  formCursos = this.fbuild.group({
+    id: [null as Number],
+    name: ['', [Validators.required]],
+    codigo: [null as String],
+    horario: ['', [Validators.required, ]],
+    teacher: ['', [Validators.required, ]],
+    start_date: ['', [Validators.required]],
+    end_date: ['', [Validators.required]],
+  });
+  
+
+  constructor( 
+      private _matDialogRef: MatDialogRef<CursosFormComponent>,
+      private fbuild: FormBuilder, 
+      private _cursoService: CursosService,
+      private _profesorService: ProfesoresService,
     ) { }
 
-  addCurso(curso:CursoSchema){
-    this.cursosService.createCurso(curso).subscribe(
-      val=>{
-        this.VerForm.emit(true);
-      }
-    )
-  }
+  cursosService=this._cursoService
+  profesorService=this._profesorService
+  matDialogRef=this._matDialogRef
 
-  updateCurso(curso:CursoSchema){
-    this.cursosService.updateCurso(curso).subscribe(
-      val=>{
-        this.VerForm.emit(true);
-      }
-    )
-  }
 
   ngOnInit(): void {
-    this.formCursos = this.fbuild.group({
-      name: ['', [Validators.required]],
-      codigo: ['', [Validators.required]],
-      horario: ['', [Validators.required, ]],
-      profesor: ['', [Validators.required, ]],
 
-    });
     //el alumno a editar no cambia asi que lo podemos traer rapidamente
-    this.cursosService.getCursoToEdit().subscribe(
-      val=>this.cursoToEdit=val
-    )
+
+    this.cursosService.oneItem
+      .subscribe(
+        val=>this.cursoToEdit=val
+      )
+    console.log(this.cursoToEdit)
     
     if(this.cursoToEdit){
       this.formCursos.get('name')?.patchValue(this.cursoToEdit.name);
       this.formCursos.get('codigo')?.patchValue(this.cursoToEdit.codigo);
       this.formCursos.get('horario')?.patchValue(this.cursoToEdit.horario);
-      this.formCursos.get('profesor')?.patchValue(this.cursoToEdit.profesor);
+      this.formCursos.get('teacher')?.patchValue(this.cursoToEdit.teacher.id);
+      this.formCursos.get('start_date')?.patchValue(this.cursoToEdit.start_date);
+      this.formCursos.get('end_date')?.patchValue(this.cursoToEdit.end_date);
     }
+    console.log(this.formCursos.value)
   }
 
-  onSubmit(){
-      if((this.formCursos.status != 'INVALID')){  
-          if(!this.cursoToEdit ){
-            this.addCurso(this.formCursos.value);
-          }else{
-            this.formCursos.value['id'] = this.cursoToEdit.id;
-            this.updateCurso(this.formCursos.value);
-            this.cursosService.cursoToEdit = null;
-          }        
-        }
-      else{
-            console.log('error')
-      }  
-}
+
+  save() {
+
+  }
+
 }

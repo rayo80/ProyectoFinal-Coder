@@ -10,7 +10,8 @@ import { AlumnosTableComponent } from './alumnos-table/alumnos-table.component';
 const routes: Routes = [
   {
     path: "",
-    component: AlumnosCrudComponent,children: [
+    component: AlumnosCrudComponent,
+    children: [
       // podria agregar otras rutas pero lo veo innecesario mejor es con modal
       { path: 'detalle/:id', component: AlumnosDetalleComponent },
       { path: 'listar', component: AlumnosTableComponent },

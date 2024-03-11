@@ -15,16 +15,16 @@
         <mat-card >
             <mat-card-header>
                 <mat-card-title>{{ profesor.name }}</mat-card-title>
-                <mat-card-subtitle>{{ profesor.apellidos }}</mat-card-subtitle>
+                <mat-card-subtitle>{{ profesor.codigo }}</mat-card-subtitle>
             </mat-card-header>
 
             <mat-card-content>
-                <p>Edad: {{ profesor.edad }}</p>
+                <p>Trayectoria: {{ profesor.formacion }}</p>
 
             </mat-card-content>
-
+            <img mat-card-image src={{profesor.picture}} alt="Photo">
             <mat-card-actions align="end">
-                <button mat-icon-button [routerLink]="'/cursos/'+profesor.id">
+                <button mat-icon-button [routerLink]="'/cursos/'+ profesor.id">
                     <mat-icon>visibility</mat-icon>
                 </button>
 

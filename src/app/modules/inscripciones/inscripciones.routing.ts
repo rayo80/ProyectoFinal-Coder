@@ -1,10 +1,11 @@
 
 import { Route } from '@angular/router';
-import { InscripcionesComponent } from './inscripciones.component';
+import { InscripcionesTableComponent } from './inscripciones-table/inscripciones-table.component';
+
 
 export const inscripcionesRoutes: Route[] = [
   {
     path: '',
-    component: InscripcionesComponent,
+    component: InscripcionesTableComponent,
   }
 ];

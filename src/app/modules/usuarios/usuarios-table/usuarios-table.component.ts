@@ -19,10 +19,9 @@ export class UsuariosTableComponent implements OnInit {
 
   optionsColumns: string[] = ['Detalle'];
 
-
   // el campo code usualmente se saca de la data misma
   // cuando se pinta la data misma
-  userColumns: IListColums[] =[
+  userColumns: IListColums[] = [
     { 
       'name': 'ID',
       'code': 'id',
@@ -40,13 +39,18 @@ export class UsuariosTableComponent implements OnInit {
       'code': 'email',
     },
     {
-      'name': 'Edad',
-      'code': 'edad',
+      'name': 'Es Admin',
+      'code': 'is_staff',
+    },
+    {
+      'name': 'Tipo',
+      'code': 'user_type',
     }
   ]
 
   ngOnInit(): void {
 
   }
+
   
 }
