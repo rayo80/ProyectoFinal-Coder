@@ -1,12 +1,15 @@
-<crm-navigation-bar (toggleSidenav)="navigationSidenav.toggle()">
-</crm-navigation-bar>
+
 <mat-sidenav-container>
   <!-- Sidenav -->
-  <mat-sidenav  #navigationSidenav class="mat-elevation-z8" mode="over">
+  <mat-sidenav  #navigationSidenav class="mat-elevation-z8" mode="side">
     <crm-sidenav></crm-sidenav>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <router-outlet></router-outlet>
+    <crm-navigation-bar (toggleSidenav)="navigationSidenav.toggle()">
+    </crm-navigation-bar>
+    <div class="crud">
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
