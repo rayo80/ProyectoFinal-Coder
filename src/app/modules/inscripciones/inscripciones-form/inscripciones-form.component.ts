@@ -73,8 +73,9 @@ export class InscripcionesFormComponent implements OnInit {
       monto: ['', [Validators.required]],
     })
     this.getElementEdit();
-    
+
     if(this.inscripcionToEdit){
+      console.log(this.inscripcionToEdit)
       this.formInscripciones.get('monto')?.patchValue(this.inscripcionToEdit.monto);
       this.formInscripciones.get('alumno')?.patchValue(this.inscripcionToEdit.alumno);
       this.formInscripciones.get('curso')?.patchValue(this.inscripcionToEdit.curso);
@@ -91,7 +92,7 @@ export class InscripcionesFormComponent implements OnInit {
         }else{
           this.formInscripciones.value['id'] = this.inscripcionToEdit.id;
           this.updateInscripcion(this.formInscripciones.value);
-          this.inscripcionesService.oneItem=null;
+          this.inscripcionesService.oneItem.next(null);
         }
     }else{
       this.error=true;
